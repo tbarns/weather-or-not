@@ -1,7 +1,7 @@
 //connects to open weather one call API
 
 var today = moment();
-var searchBox = $(aside)
+// git a
 
 
 // displays time and date 
