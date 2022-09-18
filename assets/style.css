@@ -1,0 +1,15 @@
+
+
+
+
+
+#searchBtn {
+    background-color: aquamarine;
+    font-weight: 300;
+    display: block;
+    border-radius: 15px;
+}
+
+#searchBtn:hover {
+    background-color: darkkhaki;
+}
