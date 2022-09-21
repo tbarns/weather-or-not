@@ -1,3 +1,40 @@
+body {
+    background: rgba(0, 0, 0, 0.733);
+}
+.jumbotron{
+    background: aquamarine;
+    border-radius: 0px;
+}
+
+aside {
+    background-color: bisque;
+    height: 75vh;
+    position: relative;
+    bottom: 32px;
+    padding-top: 22px;
+    
+   
+
+}
+
+
+input,
+button,
+card {
+    margin: 0;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+card {
+    /* display: none; */
+    height: 40%;
+    width: 40%;
+    background-color: violet;
+}
+
 #searchBtn {
     background-color: aquamarine;
     font-weight: 300;
@@ -7,19 +44,4 @@
 
 #searchBtn:hover {
     background-color: darkkhaki;
-}
-
-aside {
-    background-color: bisque;
-    height: 600px;
-
-}
-
-input,
-button {
-    margin: 0;
-    position: absolute;
-    top: 5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }

@@ -4,32 +4,56 @@ var today = moment();
 
 var apiKey = "f134c88b914b12f6422fd757a1b6307c"
 var searchBar = document.querySelector("input")
-var city = 
 
 
-$("#searchBtn").on("click", function () {
-    var userChoice =$(".input").val()
-    var clickCount=$('#searchBtn').on('click', clicks++);
-    console.log(userChoice)
-    console.log(typeof"userChoice")
-    console.log(city)
-    console.log(clickCount)
-   localStorage.setItem(clickCount, userChoice)
-
+function getCity (){
+var city = $("input").val()
+console.log(city)
+var history = $("<card></card>").text(city)
+$(".card").append(history);
 }
-)
+$("#searchBtn").on("click", getCity) 
+//     var userChoice =$(".input").val()
+// //     var clickCount=$('#searchBtn').on('click', clicks++);
+// //     console.log(userChoice)
+// //     console.log(typeof"userChoice")
+// //     console.log(city)
+// //     console.log(clickCount)
+// //    localStorage.setItem(clickCount, userChoice)
+// function getCity (){
+//     var city = $("input").val()
+//     console.log(city)
+//     // var history = $("<card></card>").text(city)
+//     // $("aside").append(history);
+//     // var card = $("card")
+//     // if (card.style.display == "none") {
+//     //     card.style.display == "block"
+//     // }
+//     }
+//     $("#searchBtn").on("click", getCity) 
+//     //     var userChoice =$(".input").val()
+//     //     var clickCount=$('#searchBtn').on('click', clicks++);
+//     //     console.log(userChoice)
+//     //     console.log(typeof"userChoice")
+    //     console.log(city)
+    //     console.log(clickCount)
+    //    localStorage.setItem(clickCount, userChoice)
+    
+    // }
+// }
+// )
 // displays time and date 
 $("#currentDay").text(today.format("MMM Do, YYYY"));
 
-clearSearchBar()
+// clearSearchBar()
 
-//need to clear the search bar after the user clicks search
-function clearSearchBar (){
-    $('input:text').focus(
-        function(){
-            $(this).val('');
-        });
-}
+// //need to clear the search bar after the user clicks search
+// function clearSearchBar (){
+//     $('input:text').focus(
+//         function(){
+//             $(this).val('');
+//         });
+// }
 
 
 
@@ -43,12 +67,12 @@ function clearSearchBar (){
 
 
 
-// fetch(queryURL)
+fetch(queryURL)
 
 
 
 // //edit to have this resutlt
-// var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
 
 // //weather dashboad that contains form inputs
 // //search function by city
