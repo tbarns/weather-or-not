@@ -17,6 +17,10 @@ aside {
 
 
 }
+main{
+    display: flex;
+    flex-direction: row;
+}
 
 
 input,
@@ -31,6 +35,8 @@ card {
 
 .card {
     /* display: none; */
+    justify-content: center;
+    align-items: center;
     border-radius: 20px;
     margin: 0;
     position: relative;
