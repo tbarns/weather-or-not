@@ -1,5 +1,4 @@
 //connects to open weather one call AP
-var clicks = 0
 var today = moment();
 
 var apiKey = "f134c88b914b12f6422fd757a1b6307c"
@@ -13,10 +12,14 @@ function getCity() {
     var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
     var history = $("<div>").text(city).addClass("card")
     $("#history").append(history);
+
+
+
     // if (".card".style.display == "none") {
     //     ".card".style.display == "block"
     // }
     console.log(history)
+
 
     //connects to the API to get inforation about location searched 
     fetch(queryURL)
@@ -25,38 +28,24 @@ function getCity() {
         })
         .then(function (data) {
             console.log(data)
+            var temp = data.main.temp
+            var humidity = data.main.humidity
+            var windSpeed = data.wind.speed
+            // var uvIndex =
+            var day1 = $("#day1").text(city).addClass("weatherFuture").text(temp).text(humidity).text(windSpeed)
+            $("#day1").append(day1);
+
+
+            console.log(temp)
+            console.log(humidity)
+            console.log(windSpeed)
         })
 }
 $("#searchBtn").on("click", getCity)
-//     var userChoice =$(".input").val()
-// //     var clickCount=$('#searchBtn').on('click', clicks++);
-// //     console.log(userChoice)
-// //     console.log(typeof"userChoice")
-// //     console.log(city)
-// //     console.log(clickCount)
-// //    localStorage.setItem(clickCount, userChoice)
-// function getCity (){
-//     var city = $("input").val()
-//     console.log(city)
-//     // var history = $("<card></card>").text(city)
-//     // $("aside").append(history);
-//     // var card = $("card")
-//     // if (card.style.display == "none") {
-//     //     card.style.display == "block"
-//     // }
-//     }
-//     $("#searchBtn").on("click", getCity) 
-//     //     var userChoice =$(".input").val()
-//     //     var clickCount=$('#searchBtn').on('click', clicks++);
-//     //     console.log(userChoice)
-//     //     console.log(typeof"userChoice")
-//     console.log(city)
-//     console.log(clickCount)
-//    localStorage.setItem(clickCount, userChoice)
 
-// }
-// }
-// )
+
+
+
 // displays time and date 
 $("#currentDay").text(today.format("MMM Do, YYYY"));
 
@@ -70,23 +59,6 @@ $("#currentDay").text(today.format("MMM Do, YYYY"));
 //         });
 // }
 
-
-
-// $(".saveBtn").on("click", function () {
-
-//     var text = $(this).siblings("textarea").val()
-//     var time = $(this).siblings("textarea").attr("id")
-//     localStorage.setItem(time, text)
-// }
-// )
-
-
-
-// fetch(queryURL)
-
-
-
-// // //edit to have this resutlt
 
 
 // // //weather dashboad that contains form inputs
