@@ -6,13 +6,28 @@ var apiKey = "f134c88b914b12f6422fd757a1b6307c"
 var searchBar = document.querySelector("input")
 
 
-function getCity (){
-var city = $("input").val()
-console.log(city)
-var history = $("<card></card>").text(city)
-$(".card").append(history);
+function getCity() {
+
+    var city = $("input").val()
+    console.log(city)
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+    var history = $("<div>").text(city).addClass("card")
+    $("#history").append(history);
+    // if (".card".style.display == "none") {
+    //     ".card".style.display == "block"
+    // }
+    console.log(history)
+
+    //connects to the API to get inforation about location searched 
+    fetch(queryURL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data)
+        })
 }
-$("#searchBtn").on("click", getCity) 
+$("#searchBtn").on("click", getCity)
 //     var userChoice =$(".input").val()
 // //     var clickCount=$('#searchBtn').on('click', clicks++);
 // //     console.log(userChoice)
@@ -35,11 +50,11 @@ $("#searchBtn").on("click", getCity)
 //     //     var clickCount=$('#searchBtn').on('click', clicks++);
 //     //     console.log(userChoice)
 //     //     console.log(typeof"userChoice")
-    //     console.log(city)
-    //     console.log(clickCount)
-    //    localStorage.setItem(clickCount, userChoice)
-    
-    // }
+//     console.log(city)
+//     console.log(clickCount)
+//    localStorage.setItem(clickCount, userChoice)
+
+// }
 // }
 // )
 // displays time and date 
@@ -67,15 +82,15 @@ $("#currentDay").text(today.format("MMM Do, YYYY"));
 
 
 
-fetch(queryURL)
+// fetch(queryURL)
 
 
 
-// //edit to have this resutlt
-var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+// // //edit to have this resutlt
 
-// //weather dashboad that contains form inputs
-// //search function by city
+
+// // //weather dashboad that contains form inputs
+// // //search function by city
 // // HINT
 // // Using the 5 Day Weather Forecast API, you'll notice that you will need to pass in coordinates instead of just a city name. Using the OpenWeatherMap APIs, how could we retrieve geographical coordinates given a city name?
 // //presents city's current and future conditions
