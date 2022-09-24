@@ -1,25 +1,15 @@
 //connects to open weather one call AP
 var today = moment();
-
 var apiKey = "f134c88b914b12f6422fd757a1b6307c"
 var searchBar = document.querySelector("input")
+var city;
 
+function getCity(city) {
 
-function getCity() {
-
-    var city = $("input").val()
+    city = $("input").val()
     console.log(city)
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
-    var history = $("<div>").text(city).addClass("card")
-    $("#history").append(history);
-
-
-
-    // if (".card".style.display == "none") {
-    //     ".card".style.display == "block"
-    // }
-    console.log(history)
-
+    var queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`
+    appendHistory(city)
 
     //connects to the API to get inforation about location searched 
     fetch(queryURL)
@@ -28,19 +18,57 @@ function getCity() {
         })
         .then(function (data) {
             console.log(data)
+            var today = moment().format('L');
             var temp = data.main.temp
             var humidity = data.main.humidity
             var windSpeed = data.wind.speed
+            var weatherIcon = data.weather[0].icon
+            var iconUrl = `https://openweathermap.org/img/w/${weatherIcon}.png`
+        console.log(iconUrl)
             // var uvIndex =
-            var day1 = $("#day1").text(city).addClass("weatherFuture").text(temp).text(humidity).text(windSpeed)
-            $("#day1").append(day1);
+            var day1City = $("<p>").text(city)
+            var day1Temp = $("<p>").text(temp)
+            var day1Humidity = $("<p>").text(humidity)
+            var day1Wind = $("<p>").text(windSpeed)
+            var iconImage = $("<img>").attr({src:iconUrl})
+            var lat = data.coord.lat
+            var lon = data.coord.lon
+            fiveDay(lat, lon)
 
+            // var day1Wind =document.createElement("p")
+            // day1Wind.textContent= day1WindSpeed
 
-            console.log(temp)
-            console.log(humidity)
-            console.log(windSpeed)
+            $("#day1").append(day1City);
+            $("#day1").append(day1Temp);
+            $("#day1").append(day1Wind);
+            $("#day1").append(day1Humidity);
+            $("#day1").append(today)
+            $("#day1").append(iconImage)
+
+            console.log("city:" + city)
+            console.log("temp:" + temp)
+            console.log("humidity:" + humidity)
+            console.log("Wind Speed:" + windSpeed)
+            console.log("TOday :" + today)
         })
 }
+function appendHistory(city) {
+    var history = $("<div>").text(city).addClass("card")
+    $("#history").append(history);
+
+}
+function fiveDay(lat, lon) {
+ var apiKey2 ="9463a2f89658134991482cc1e1033c49"
+    fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey2}`)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data)
+        })
+
+}
+
 $("#searchBtn").on("click", getCity)
 
 

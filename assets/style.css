@@ -65,9 +65,10 @@ card {
     background: rgba(218, 201, 218, 0.363);
 
 }
-#day1{
+
+#day1 {
     position: absolute;
-    left:38%;
+    left: 38%;
     top: 20%;
     height: 50vh;
     width: 100vh;
