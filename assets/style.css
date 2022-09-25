@@ -1,17 +1,35 @@
 body {
     background: rgba(0, 0, 0, 0.733);
+    
 }
 
 .jumbotron {
     background: aquamarine;
     border-radius: 0px;
 }
-
+section{
+    padding: 0px;
+}
 aside {
     background-color: bisque;
     height: 50vh;
+    padding: 0px;
+}
+#history{
+    padding: 0px;
+}
+.row{
+    position: relative;
+    top: -34px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
+.future{
+    border: rgba(238, 190, 227, 0.411) 1px dashed;
+    padding: 0px;
+    margin-right: 18px;
+}
 
 input,
 button,
@@ -24,7 +42,7 @@ card {
 }
 
 .card {
-    /* display: none; */
+    
     justify-content: center;
     align-items: center;
     border-radius: 20px;
@@ -42,6 +60,10 @@ card {
 #weatherBar {
 
     background-color: aqua;
+    width: 80vh;
+    height: 30vh;
+    padding: 0px;
+    text-align: center;
 
 }
 
@@ -53,6 +75,9 @@ card {
 
 #day1 {
     background-color: darkgray;
+    padding: 0px;
+    font-size: 30px;
+   text-align: center;
 
 }
 

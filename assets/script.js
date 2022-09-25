@@ -24,10 +24,6 @@ function getCity(city) {
             fiveDay(lat, lon)
             console.log(lat)
             console.log(lon)
-            // var day1Wind =document.createElement("p")
-            // day1Wind.textContent= day1WindSpeed
-
-
         })
 }
 function appendHistory(city) {
@@ -38,7 +34,7 @@ function appendHistory(city) {
 function fiveDay(lat, lon) {
     city = $("input").val()
     console.log(city)
-    var apiKey2 = 
+    var apiKey2 = "d91f911bcf2c0f925fb6535547a5ddc9"
     fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey2}`)
         .then(function (response) {
             return response.json();
@@ -47,10 +43,10 @@ function fiveDay(lat, lon) {
             console.log(data)
 
             var today = moment().format('dddd');
-            var day2Day = moment().add(1,'days').format('dddd');
-            var day3Day =moment().add(2,'days').format('dddd')
-            var day4Day =moment().add(3,'days').format('dddd')
-            var day5Day =moment().add(4,'days').format('dddd')
+            var day2Day = moment().add(1, 'days').format('dddd');
+            var day3Day = moment().add(2, 'days').format('dddd')
+            var day4Day = moment().add(3, 'days').format('dddd')
+            var day5Day = moment().add(4, 'days').format('dddd')
             var temp = data.current.temp
             var humidity = data.current.humidity
             var windSpeed = data.current.wind_speed
@@ -166,7 +162,30 @@ $("#searchBtn").on("click", getCity)
 // displays time and date 
 $("#currentDay").text(today.format("dddd, MMM Do, YYYY"));
 
-// clearSearchBar()
+// function clearSearch(click) {
+
+
+
+//       var searchBarInput =searchBar.value;
+     
+//           if (!searchBarInput) {
+//         console.error('You need a search a place!');
+//         return;
+//       }
+//      $("#searchBtn").on("click", getCity)
+   
+//     }
+   
+    
+
+
+
+
+
+    //when i click the search button another time, clear the day 1 section and the weather bar and load it with the new search data
+
+
+
 
 // //need to clear the search bar after the user clicks search
 // function clearSearchBar (){
