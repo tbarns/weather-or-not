@@ -9,15 +9,7 @@ body {
 
 aside {
     background-color: bisque;
-    height: 75vh;
-    width: 25vh;
-    position: relative;
-    bottom: 32px;
-    padding-top: 22px;
-
-
-
-
+    height: 50vh;
 }
 
 
@@ -40,38 +32,27 @@ card {
     position: relative;
     top: 5%;
     left: 20%;
-    height: 30%;
+    height: 5%;
     width: 60%;
+    margin: 2px;
     background: rgba(238, 130, 238, 0.363);
 
 }
 
-.weatherBar {
+#weatherBar {
 
     background-color: aqua;
-    width: 150vh;
-    height: 25vh;
-    position: absolute;
-    top: 70.18%;
-    left: 12.85%;
+
 }
 
 .weatherFuture {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    height: 100px;
-    width: 100x;
-    background: rgba(218, 201, 218, 0.363);
+
+    background: rgba(199, 10, 199, 0.363);
 
 }
 
 #day1 {
-    position: absolute;
-    left: 38%;
-    top: 20%;
-    height: 50vh;
-    width: 100vh;
+    background-color: darkgray;
 
 }
 

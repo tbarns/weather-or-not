@@ -24,13 +24,13 @@ function getCity(city) {
             var windSpeed = data.wind.speed
             var weatherIcon = data.weather[0].icon
             var iconUrl = `https://openweathermap.org/img/w/${weatherIcon}.png`
-        console.log(iconUrl)
+            console.log(iconUrl)
             // var uvIndex =
             var day1City = $("<p>").text(city)
             var day1Temp = $("<p>").text(temp)
             var day1Humidity = $("<p>").text(humidity)
             var day1Wind = $("<p>").text(windSpeed)
-            var iconImage = $("<img>").attr({src:iconUrl})
+            var iconImage = $("<img>").attr({ src: iconUrl })
             var lat = data.coord.lat
             var lon = data.coord.lon
             fiveDay(lat, lon)
@@ -58,7 +58,7 @@ function appendHistory(city) {
 
 }
 function fiveDay(lat, lon) {
- var apiKey2 ="9463a2f89658134991482cc1e1033c49"
+    // var apiKey2 = ?
     fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey2}`)
         .then(function (response) {
             return response.json();
@@ -66,6 +66,61 @@ function fiveDay(lat, lon) {
         .then(function (data) {
             console.log(data)
         })
+        var temp = data.main.temp
+        var humidity = data.main.humidity
+        var windSpeed = data.wind.speed
+        var weatherIcon = data.weather[0].icon
+        var iconUrl = `https://openweathermap.org/img/w/${weatherIcon}.png`
+        console.log(iconUrl)
+
+
+        var day2City = $("<p>").text(city)
+        var day2Temp = $("<p>").text(temp)
+        var day2Humidity = $("<p>").text(humidity)
+        var day2Wind = $("<p>").text(windSpeed)
+        var day2IconImage = $("<img>").attr({ src: iconUrl })
+        $("#day2").append(day2City);
+        $("#day2").append(day2Temp);
+        $("#day2").append(day2Wind);
+        $("#day2").append(day2Humidity);
+        $("#day2").append(today)
+        $("#day2").append(day2IconImage)
+
+
+        var day3City = $("<p>").text(city)
+        var day3Temp = $("<p>").text(temp)
+        var day3Humidity = $("<p>").text(humidity)
+        var day3Wind = $("<p>").text(windSpeed)
+        var day3IconImage = $("<img>").attr({ src: iconUrl })
+        $("#day3").append(day3City);
+        $("#day3").append(day3Temp);
+        $("#day3").append(day3Wind);
+        $("#day3").append(day3Humidity);
+        $("#day3").append(today)
+        $("#day3").append(day3IconImage)
+
+        var day4City = $("<p>").text(city)
+        var day4Temp = $("<p>").text(temp)
+        var day4Humidity = $("<p>").text(humidity)
+        var day4Wind = $("<p>").text(windSpeed)
+        var day4IconImage = $("<img>").attr({ src: iconUrl })
+        $("#day4").append(day4City);
+        $("#day4").append(day4Temp);
+        $("#day4").append(day4Wind);
+        $("#day4").append(day4Humidity);
+        $("#day4").append(today)
+        $("#day4").append(day4IconImage)
+        var day5City = $("<p>").text(city)
+        var day5Temp = $("<p>").text(temp)
+        var day5Humidity = $("<p>").text(humidity)
+        var day5Wind = $("<p>").text(windSpeed)
+        var day5IconImage = $("<img>").attr({ src: iconUrl })
+        $("#day5").append(day5City);
+        $("#day5").append(day5Temp);
+        $("#day5").append(day5Wind);
+        $("#day5").append(day5Humidity);
+        $("#day5").append(today)
+        $("#day5").append(day5IconImage)
 
 }
 
