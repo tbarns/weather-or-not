@@ -34,8 +34,8 @@ function appendHistory(city) {
 function fiveDay(lat, lon) {
     city = $("input").val()
     console.log(city)
-    var apiKey2 = "d91f911bcf2c0f925fb6535547a5ddc9"
-    fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey2}`)
+    var apiKey2 = "f134c88b914b12f6422fd757a1b6307c"
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey2}`)
         .then(function (response) {
             return response.json();
         })
@@ -47,10 +47,16 @@ function fiveDay(lat, lon) {
             var day3Day = moment().add(2, 'days').format('dddd')
             var day4Day = moment().add(3, 'days').format('dddd')
             var day5Day = moment().add(4, 'days').format('dddd')
-            var temp = data.current.temp
-            var humidity = data.current.humidity
-            var windSpeed = data.current.wind_speed
-            var weatherIcon = data.current.weather[0].icon
+            
+            
+            
+            
+            
+            
+            var temp = data.list[0].main.temp
+            var humidity = data.list[0].main.humidity
+            var windSpeed = data.list[0].wind.speed
+            var weatherIcon = data.list[0].weather[0].icon
             var iconUrl = `https://openweathermap.org/img/w/${weatherIcon}.png`
             console.log(iconUrl)
 
@@ -59,12 +65,13 @@ function fiveDay(lat, lon) {
             var day1Humidity = $("<p>").append("Humidity: ", humidity)
             var day1Wind = $("<p>").append("Windspeed: ", windSpeed)
             var iconImage = $("<img>").attr({ src: iconUrl })
-            $("#day1").append(day1City);
+           
             $("#day1").append(day1Temp);
             $("#day1").append(day1Wind);
             $("#day1").append(day1Humidity);
             $("#day1").append(today)
-            $("#day1").append(iconImage)
+            $("#day1").prepend(iconImage)
+            $("#day1").prepend(day1City);
 
             console.log("city:" + city)
             console.log("temp:" + temp)
@@ -75,10 +82,12 @@ function fiveDay(lat, lon) {
 
             // var today = moment().format('dddd');
             //this handles day 2 of the furutre weather 
-            var temp2 = data.daily[1].temp.day
-            var humidity2 = data.daily[1].humidity
-            var windSpeed2 = data.daily[1].wind_speed
-            var weatherIcon2 = data.daily[1].weather[0].icon
+
+            
+            var temp2 = data.list[1].main.temp
+            var humidity2 = data.list[1].main.humidity
+            var windSpeed2 = data.list[1].wind.speed
+            var weatherIcon2 = data.list[1].weather[0].icon
             var iconUrl2 = `https://openweathermap.org/img/w/${weatherIcon2}.png`
 
             var day2City = $("<p>").append("City: ", city)
@@ -94,10 +103,10 @@ function fiveDay(lat, lon) {
             $("#day2").append(iconImage2)
 
             //this handles day 3 of the furutre weather 
-            var temp3 = data.daily[2].temp.day
-            var humidity3 = data.daily[2].humidity
-            var windSpeed3 = data.daily[2].wind_speed
-            var weatherIcon3 = data.daily[2].weather[0].icon
+            var temp3 = data.list[2].main.temp
+            var humidity3 = data.list[2].main.humidity
+            var windSpeed3 = data.list[2].wind.speed
+            var weatherIcon3 = data.list[2].weather[0].icon
             var iconUrl3 = `https://openweathermap.org/img/w/${weatherIcon3}.png`
 
             var day3City = $("<p>").append("City: ", city)
@@ -113,10 +122,10 @@ function fiveDay(lat, lon) {
             $("#day3").append(iconImage3)
 
             //this handles day 4 of the furutre weather 
-            var temp4 = data.daily[3].temp.day
-            var humidity4 = data.daily[3].humidity
-            var windSpeed4 = data.daily[3].wind_speed
-            var weatherIcon4 = data.daily[3].weather[0].icon
+            var temp4 = data.list[3].main.temp
+            var humidity4 = data.list[3].main.humidity
+            var windSpeed4 = data.list[3].wind.speed
+            var weatherIcon4 = data.list[3].weather[0].icon
             var iconUrl4 = `https://openweathermap.org/img/w/${weatherIcon4}.png`
 
             var day4City = $("<p>").append("City: ", city)
@@ -133,10 +142,10 @@ function fiveDay(lat, lon) {
 
 
             //this handles day 5 of the furutre weather 
-            var temp5 = data.daily[4].temp.day
-            var humidity5 = data.daily[4].humidity
-            var windSpeed5 = data.daily[4].wind_speed
-            var weatherIcon5 = data.daily[4].weather[0].icon
+            var temp5 = data.list[4].temp
+            var humidity5 = data.list[4].humidity
+            var windSpeed5 = data.list[4].wind.speed
+            var weatherIcon5 = data.list[4].weather[0].icon
             var iconUrl5 = `https://openweathermap.org/img/w/${weatherIcon5}.png`
 
             var day5City = $("<p>").append("City: ", city)
@@ -162,19 +171,19 @@ $("#searchBtn").on("click", getCity)
 // displays time and date 
 $("#currentDay").text(today.format("dddd, MMM Do, YYYY"));
 
-// function clearSearch(click) {
+function clearSearch(click) {
 
 
 
-//       var searchBarInput =searchBar.value;
+      var searchBarInput =searchBar.value;
      
-//           if (!searchBarInput) {
-//         console.error('You need a search a place!');
-//         return;
-//       }
-//      $("#searchBtn").on("click", getCity)
+          if (!searchBarInput) {
+        console.error('You need a search a place!');
+        return;
+      }
+     $("#searchBtn").on("click", getCity)
    
-//     }
+    }
    
     
 
