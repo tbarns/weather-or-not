@@ -57,7 +57,7 @@ function fiveDay(lat, lon) {
             var day1City = $("<p>").append("City: ", city)
             var day1Temp = $("<p>").append("Temp: ", temp, "°F")
             var day1Humidity = $("<p>").append("Humidity: ", humidity, "%")
-            var day1Wind = $("<p>").append("Windspeed: ", windSpeed)
+            var day1Wind = $("<p>").append("Windspeed: ", windSpeed,  "mph")
             var iconImage = $("<img>").attr({ src: iconUrl })
             $("#day1").empty()
 
@@ -67,12 +67,6 @@ function fiveDay(lat, lon) {
             $("#day1").append(today)
             $("#day1").prepend(iconImage)
             $("#day1").prepend(day1City);
-
-            console.log("city:" + city)
-            console.log("temp:" + temp)
-            console.log("humidity:" + humidity)
-            console.log("Wind Speed:" + windSpeed)
-            console.log("TOday :" + today)
 
 
             // var today = moment().format('dddd');
@@ -89,7 +83,7 @@ function fiveDay(lat, lon) {
             var day2City = $("<p>").append("City: ", city)
             var day2Temp = $("<p>").append("Temp: ", temp2, "°F")
             var day2Humidity = $("<p>").append("Humidity: ", humidity2, "%")
-            var day2Wind = $("<p>").append("Windspeed: ", windSpeed2)
+            var day2Wind = $("<p>").append("Windspeed: ", windSpeed2,  "mph")
             var iconImage2 = $("<img>").attr({ src: iconUrl2 })
 
             $("#day2").empty()
@@ -110,7 +104,7 @@ function fiveDay(lat, lon) {
             var day3City = $("<p>").append("City: ", city)
             var day3Temp = $("<p>").append("Temp: ", temp3, "°F")
             var day3Humidity = $("<p>").append("Humidity: ", humidity3, "%")
-            var day3Wind = $("<p>").append("Windspeed: ", windSpeed3)
+            var day3Wind = $("<p>").append("Windspeed: ", windSpeed3,  "mph")
             var iconImage3 = $("<img>").attr({ src: iconUrl3 })
 
             $("#day3").empty()
@@ -131,7 +125,7 @@ function fiveDay(lat, lon) {
             var day4City = $("<p>").append("City: ", city)
             var day4Temp = $("<p>").append("Temp: ", temp4, "°F")
             var day4Humidity = $("<p>").append("Humidity: ", humidity4, "%")
-            var day4Wind = $("<p>").append("Windspeed: ", windSpeed4)
+            var day4Wind = $("<p>").append("Windspeed: ", windSpeed4,  "mph")
             var iconImage4 = $("<img>").attr({ src: iconUrl4 })
 
             $("#day4").empty()
@@ -153,7 +147,7 @@ function fiveDay(lat, lon) {
             var day5City = $("<p>").append("City: ", city)
             var day5Temp = $("<p>").append("Temp: ", temp5, "°F")
             var day5Humidity = $("<p>").append("Humidity: ", humidity5, "%")
-            var day5Wind = $("<p>").append("Windspeed: ", windSpeed5)
+            var day5Wind = $("<p>").append("Windspeed: ", windSpeed5,  "mph")
             var iconImage5 = $("<img>").attr({ src: iconUrl5 })
 
             $("#day5").empty()
@@ -180,3 +174,4 @@ $("#currentDay").append(title)
 
 // //local storage that contains city serach history
 // //when i click a city in history i am displayed current and future conditions
+//i know that local storage here is complicated because my function is so repetaive.  I need to figure out how to save the data from the function into local storage and how to make the history cards an event to trick the retrieval of the localstorage.
