@@ -5,13 +5,13 @@ var searchBar = document.querySelector("input")
 var city;
 
 function getCity(city) {
-
     city = $("input").val()
-    console.log(city)
+
+    //i struggled with getting my API key to function properly so to avoid doing multiple calls to the specifed API i chose to grab the LAT and LON from a sepreate API
     var queryURL = `https://api.geoapify.com/v1/geocode/search?text=${city}&lang=en&limit=10&type=city&apiKey=${apiKey}`
     appendHistory(city)
 
-    //connects to the API to get inforation about location searched 
+    //connects to the API to get inforation about location searched  byt the user
     fetch(queryURL)
         .then(function (response) {
             return response.json();
@@ -22,8 +22,7 @@ function getCity(city) {
             var lon = data.features[0].geometry.coordinates[0]
             var lat = data.features[0].geometry.coordinates[1]
             fiveDay(lat, lon)
-            console.log(lat)
-            console.log(lon)
+
         })
 }
 function appendHistory(city) {
@@ -33,7 +32,7 @@ function appendHistory(city) {
 }
 function fiveDay(lat, lon) {
     city = $("input").val()
-    console.log(city)
+
     var apiKey2 = "f134c88b914b12f6422fd757a1b6307c"
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey2}`)
         .then(function (response) {
@@ -41,31 +40,27 @@ function fiveDay(lat, lon) {
         })
         .then(function (data) {
             console.log(data)
-
+            //this set of variabel displays the day of the week for the future forecasts
             var today = moment().format('dddd');
             var day2Day = moment().add(1, 'days').format('dddd');
             var day3Day = moment().add(2, 'days').format('dddd')
             var day4Day = moment().add(3, 'days').format('dddd')
             var day5Day = moment().add(4, 'days').format('dddd')
-            
-            
-            
-            
-            
-            
+
             var temp = data.list[0].main.temp
             var humidity = data.list[0].main.humidity
             var windSpeed = data.list[0].wind.speed
             var weatherIcon = data.list[0].weather[0].icon
             var iconUrl = `https://openweathermap.org/img/w/${weatherIcon}.png`
-            console.log(iconUrl)
+
 
             var day1City = $("<p>").append("City: ", city)
             var day1Temp = $("<p>").append("Temp: ", temp, "°F")
-            var day1Humidity = $("<p>").append("Humidity: ", humidity)
+            var day1Humidity = $("<p>").append("Humidity: ", humidity, "%")
             var day1Wind = $("<p>").append("Windspeed: ", windSpeed)
             var iconImage = $("<img>").attr({ src: iconUrl })
-           
+            $("#day1").empty()
+
             $("#day1").append(day1Temp);
             $("#day1").append(day1Wind);
             $("#day1").append(day1Humidity);
@@ -82,8 +77,9 @@ function fiveDay(lat, lon) {
 
             // var today = moment().format('dddd');
             //this handles day 2 of the furutre weather 
+            //i know that this could be handled more efficiantly with a for loop, however the 2 reasons i am not doing that is 1: i need more practice understading JS and how it functions and 2: the for loop is something i understand but not well enough to impliment it for so many different variable so i want to avoid issues within the time constraints of the homework.
 
-            
+
             var temp2 = data.list[1].main.temp
             var humidity2 = data.list[1].main.humidity
             var windSpeed2 = data.list[1].wind.speed
@@ -92,9 +88,11 @@ function fiveDay(lat, lon) {
 
             var day2City = $("<p>").append("City: ", city)
             var day2Temp = $("<p>").append("Temp: ", temp2, "°F")
-            var day2Humidity = $("<p>").append("Humidity: ", humidity2)
+            var day2Humidity = $("<p>").append("Humidity: ", humidity2, "%")
             var day2Wind = $("<p>").append("Windspeed: ", windSpeed2)
             var iconImage2 = $("<img>").attr({ src: iconUrl2 })
+
+            $("#day2").empty()
             $("#day2").append(day2City);
             $("#day2").append(day2Temp);
             $("#day2").append(day2Wind);
@@ -111,9 +109,11 @@ function fiveDay(lat, lon) {
 
             var day3City = $("<p>").append("City: ", city)
             var day3Temp = $("<p>").append("Temp: ", temp3, "°F")
-            var day3Humidity = $("<p>").append("Humidity: ", humidity3)
+            var day3Humidity = $("<p>").append("Humidity: ", humidity3, "%")
             var day3Wind = $("<p>").append("Windspeed: ", windSpeed3)
             var iconImage3 = $("<img>").attr({ src: iconUrl3 })
+
+            $("#day3").empty()
             $("#day3").append(day3City);
             $("#day3").append(day3Temp);
             $("#day3").append(day3Wind);
@@ -130,9 +130,11 @@ function fiveDay(lat, lon) {
 
             var day4City = $("<p>").append("City: ", city)
             var day4Temp = $("<p>").append("Temp: ", temp4, "°F")
-            var day4Humidity = $("<p>").append("Humidity: ", humidity4)
+            var day4Humidity = $("<p>").append("Humidity: ", humidity4, "%")
             var day4Wind = $("<p>").append("Windspeed: ", windSpeed4)
             var iconImage4 = $("<img>").attr({ src: iconUrl4 })
+
+            $("#day4").empty()
             $("#day4").append(day4City);
             $("#day4").append(day4Temp);
             $("#day4").append(day4Wind);
@@ -142,17 +144,19 @@ function fiveDay(lat, lon) {
 
 
             //this handles day 5 of the furutre weather 
-            var temp5 = data.list[4].temp
-            var humidity5 = data.list[4].humidity
+            var temp5 = data.list[4].main.temp
+            var humidity5 = data.list[4].main.humidity
             var windSpeed5 = data.list[4].wind.speed
             var weatherIcon5 = data.list[4].weather[0].icon
             var iconUrl5 = `https://openweathermap.org/img/w/${weatherIcon5}.png`
 
             var day5City = $("<p>").append("City: ", city)
             var day5Temp = $("<p>").append("Temp: ", temp5, "°F")
-            var day5Humidity = $("<p>").append("Humidity: ", humidity5)
+            var day5Humidity = $("<p>").append("Humidity: ", humidity5, "%")
             var day5Wind = $("<p>").append("Windspeed: ", windSpeed5)
             var iconImage5 = $("<img>").attr({ src: iconUrl5 })
+
+            $("#day5").empty()
             $("#day5").append(day5City);
             $("#day5").append(day5Temp);
             $("#day5").append(day5Wind);
@@ -168,42 +172,8 @@ $("#searchBtn").on("click", getCity)
 
 
 
-// displays time and date 
+// displays and date 
 $("#currentDay").text(today.format("dddd, MMM Do, YYYY"));
-
-function clearSearch(click) {
-
-
-
-      var searchBarInput =searchBar.value;
-     
-          if (!searchBarInput) {
-        console.error('You need a search a place!');
-        return;
-      }
-     $("#searchBtn").on("click", getCity)
-   
-    }
-   
-    
-
-
-
-
-
-    //when i click the search button another time, clear the day 1 section and the weather bar and load it with the new search data
-
-
-
-
-// //need to clear the search bar after the user clicks search
-// function clearSearchBar (){
-//     $('input:text').focus(
-//         function(){
-//             $(this).val('');
-//         });
-// }
-
 
 
 
