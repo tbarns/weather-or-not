@@ -6,6 +6,7 @@ I was tasked with creating a weather app that performed and fetch request to the
 
 ## Installation 
 
+https://tbarns.github.io/weather-or-not/
 
 ## Usage 
 
