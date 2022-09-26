@@ -1,11 +1,17 @@
 body {
     background: rgba(0, 0, 0, 0.733);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 
 }
 
 .jumbotron {
     background: aquamarine;
     border-radius: 0px;
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 30px;
+    color: rgb(8, 7, 5);
+    padding: 25px;
+    
 }
 
 section {
@@ -30,9 +36,10 @@ aside {
 }
 
 .future {
-    border: rgba(238, 190, 227, 0.411) 1px dashed;
+    border: rgba(238, 190, 227, 0.411) 2px dashed;
     padding: 0px;
     margin-right: 18px;
+
 }
 
 input,

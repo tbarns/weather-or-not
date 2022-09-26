@@ -170,10 +170,11 @@ function fiveDay(lat, lon) {
 $("#searchBtn").on("click", getCity)
 
 
-
+var title = $("<p>").text("5-day weather forecast")
 
 // displays and date 
 $("#currentDay").text(today.format("dddd, MMM Do, YYYY"));
+$("#currentDay").append(title)
 
 
 
