@@ -1,7 +1,6 @@
 body {
     background: rgba(0, 0, 0, 0.733);
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 .jumbotron {
@@ -11,7 +10,7 @@ body {
     font-size: 30px;
     color: rgb(8, 7, 5);
     padding: 25px;
-    
+
 }
 
 section {

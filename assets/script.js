@@ -1,14 +1,13 @@
 //connects to open weather one call AP
 var today = moment();
-var apiKey = "2ec90fd8c4da49f295bc137b12c0cafd"
+var apiKey = "f134c88b914b12f6422fd757a1b6307c"
 var searchBar = document.querySelector("input")
 var city;
 
 function getCity(city) {
     city = $("input").val()
 
-    //i struggled with getting my API key to function properly so to avoid doing multiple calls to the specifed API i chose to grab the LAT and LON from a sepreate API
-    var queryURL = `https://api.geoapify.com/v1/geocode/search?text=${city}&lang=en&limit=10&type=city&apiKey=${apiKey}`
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     appendHistory(city)
 
     //connects to the API to get inforation about location searched  byt the user
@@ -17,10 +16,10 @@ function getCity(city) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data)
+            // console.log(data)
 
-            var lon = data.features[0].geometry.coordinates[0]
-            var lat = data.features[0].geometry.coordinates[1]
+            var lon = data.coord.lon
+            var lat = data.coord.lat
             fiveDay(lat, lon)
 
         })
@@ -33,13 +32,12 @@ function appendHistory(city) {
 function fiveDay(lat, lon) {
     city = $("input").val()
 
-    var apiKey2 = "f134c88b914b12f6422fd757a1b6307c"
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey2}`)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data)
+            // console.log(data)
             //this set of variabel displays the day of the week for the future forecasts
             var today = moment().format('dddd');
             var day2Day = moment().add(1, 'days').format('dddd');
@@ -57,7 +55,7 @@ function fiveDay(lat, lon) {
             var day1City = $("<p>").append("City: ", city)
             var day1Temp = $("<p>").append("Temp: ", temp, "°F")
             var day1Humidity = $("<p>").append("Humidity: ", humidity, "%")
-            var day1Wind = $("<p>").append("Windspeed: ", windSpeed,  "mph")
+            var day1Wind = $("<p>").append("Windspeed: ", windSpeed, "mph")
             var iconImage = $("<img>").attr({ src: iconUrl })
             $("#day1").empty()
 
@@ -83,7 +81,7 @@ function fiveDay(lat, lon) {
             var day2City = $("<p>").append("City: ", city)
             var day2Temp = $("<p>").append("Temp: ", temp2, "°F")
             var day2Humidity = $("<p>").append("Humidity: ", humidity2, "%")
-            var day2Wind = $("<p>").append("Windspeed: ", windSpeed2,  "mph")
+            var day2Wind = $("<p>").append("Windspeed: ", windSpeed2, "mph")
             var iconImage2 = $("<img>").attr({ src: iconUrl2 })
 
             $("#day2").empty()
@@ -104,7 +102,7 @@ function fiveDay(lat, lon) {
             var day3City = $("<p>").append("City: ", city)
             var day3Temp = $("<p>").append("Temp: ", temp3, "°F")
             var day3Humidity = $("<p>").append("Humidity: ", humidity3, "%")
-            var day3Wind = $("<p>").append("Windspeed: ", windSpeed3,  "mph")
+            var day3Wind = $("<p>").append("Windspeed: ", windSpeed3, "mph")
             var iconImage3 = $("<img>").attr({ src: iconUrl3 })
 
             $("#day3").empty()
@@ -125,7 +123,7 @@ function fiveDay(lat, lon) {
             var day4City = $("<p>").append("City: ", city)
             var day4Temp = $("<p>").append("Temp: ", temp4, "°F")
             var day4Humidity = $("<p>").append("Humidity: ", humidity4, "%")
-            var day4Wind = $("<p>").append("Windspeed: ", windSpeed4,  "mph")
+            var day4Wind = $("<p>").append("Windspeed: ", windSpeed4, "mph")
             var iconImage4 = $("<img>").attr({ src: iconUrl4 })
 
             $("#day4").empty()
@@ -147,7 +145,7 @@ function fiveDay(lat, lon) {
             var day5City = $("<p>").append("City: ", city)
             var day5Temp = $("<p>").append("Temp: ", temp5, "°F")
             var day5Humidity = $("<p>").append("Humidity: ", humidity5, "%")
-            var day5Wind = $("<p>").append("Windspeed: ", windSpeed5,  "mph")
+            var day5Wind = $("<p>").append("Windspeed: ", windSpeed5, "mph")
             var iconImage5 = $("<img>").attr({ src: iconUrl5 })
 
             $("#day5").empty()
