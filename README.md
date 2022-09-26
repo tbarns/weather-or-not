@@ -9,7 +9,7 @@ I was tasked with creating a weather app that performed and fetch request to the
 
 ## Usage 
 
- <img src="assets/Screenshot-1.png"   alt="Screenshot of live webpage">
+ <img src="assets/Screenshot_1.png"   alt="Screenshot of live webpage">
  <!-- <img src="assets/Screenshot-2.png"   alt="Screenshot of live webpage"> -->
 
 
