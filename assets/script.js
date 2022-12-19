@@ -36,7 +36,9 @@ function fiveDay(lat, lon) {
         .then(function (response) {
             return response.json();
         })
+       
         .then(function (data) {
+
             // console.log(data)
             //this set of variabel displays the day of the week for the future forecasts
             var today = moment().format('dddd');
@@ -72,10 +74,10 @@ function fiveDay(lat, lon) {
             //i know that this could be handled more efficiantly with a for loop, however the 2 reasons i am not doing that is 1: i need more practice understading JS and how it functions and 2: the for loop is something i understand but not well enough to impliment it for so many different variable so i want to avoid issues within the time constraints of the homework.
 
 
-            var temp2 = data.list[1].main.temp
-            var humidity2 = data.list[1].main.humidity
-            var windSpeed2 = data.list[1].wind.speed
-            var weatherIcon2 = data.list[1].weather[0].icon
+            var temp2 = data.list[8].main.temp
+            var humidity2 = data.list[8].main.humidity
+            var windSpeed2 = data.list[8].wind.speed
+            var weatherIcon2 = data.list[8].weather[0].icon
             var iconUrl2 = `https://openweathermap.org/img/w/${weatherIcon2}.png`
 
             var day2City = $("<p>").append("City: ", city)
@@ -93,10 +95,10 @@ function fiveDay(lat, lon) {
             $("#day2").append(iconImage2)
 
             //this handles day 3 of the furutre weather 
-            var temp3 = data.list[2].main.temp
-            var humidity3 = data.list[2].main.humidity
-            var windSpeed3 = data.list[2].wind.speed
-            var weatherIcon3 = data.list[2].weather[0].icon
+            var temp3 = data.list[16].main.temp
+            var humidity3 = data.list[16].main.humidity
+            var windSpeed3 = data.list[16].wind.speed
+            var weatherIcon3 = data.list[16].weather[0].icon
             var iconUrl3 = `https://openweathermap.org/img/w/${weatherIcon3}.png`
 
             var day3City = $("<p>").append("City: ", city)
@@ -114,10 +116,10 @@ function fiveDay(lat, lon) {
             $("#day3").append(iconImage3)
 
             //this handles day 4 of the furutre weather 
-            var temp4 = data.list[3].main.temp
-            var humidity4 = data.list[3].main.humidity
-            var windSpeed4 = data.list[3].wind.speed
-            var weatherIcon4 = data.list[3].weather[0].icon
+            var temp4 = data.list[24].main.temp
+            var humidity4 = data.list[24].main.humidity
+            var windSpeed4 = data.list[24].wind.speed
+            var weatherIcon4 = data.list[24].weather[0].icon
             var iconUrl4 = `https://openweathermap.org/img/w/${weatherIcon4}.png`
 
             var day4City = $("<p>").append("City: ", city)
@@ -136,10 +138,10 @@ function fiveDay(lat, lon) {
 
 
             //this handles day 5 of the furutre weather 
-            var temp5 = data.list[4].main.temp
-            var humidity5 = data.list[4].main.humidity
-            var windSpeed5 = data.list[4].wind.speed
-            var weatherIcon5 = data.list[4].weather[0].icon
+            var temp5 = data.list[32].main.temp
+            var humidity5 = data.list[32].main.humidity
+            var windSpeed5 = data.list[32].wind.speed
+            var weatherIcon5 = data.list[32].weather[0].icon
             var iconUrl5 = `https://openweathermap.org/img/w/${weatherIcon5}.png`
 
             var day5City = $("<p>").append("City: ", city)

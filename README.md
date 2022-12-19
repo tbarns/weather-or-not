@@ -2,10 +2,9 @@
 
 ## Description
 
-I was tasked with creating a weather app that performed and fetch request to the https://openweathermap.org/api in ogre to accomplish this task I used a secondary api from https://www.geoapify.com/ to pull the latitude and longitude for each location the user inputs.  This assignment was a challenge since there was no code provided.  I enjoyed styling and laying out the HTML and I got a lot more comfortable dynamically creating elements with JQUERY.  This task challenged me to really understand what a fetch request to an API is capable of.  It took a lot of effort to extract the data and display it but I am quite pleased at how it turned out.
+I was tasked with creating a weather app that performed a fetch request to the https://openweathermap.org/api  and in order to do this I needed to pull the latitude and longitude for each location the user inputs.  This outputs a 5 day forecast complete with the Humidity, wind speed and an Icon that represent the weather forecast for the area. 
 
-*UPDATE
-I was getting an error emssage due to the API that was not recommended.  I wanted to avoid this error message in my console so I dug in and was able to work out how to do 2 API calls and get the data that I needed!  This means I am no longer using the "geoapify" but since it was a major part of how I solved my issues to start I wanted to keep the relevant info in this file as a record of my progress and thinking. 
+
 
 ## Installation 
 
