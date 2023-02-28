@@ -1,4 +1,6 @@
-
+* {
+user-select: none;
+}
 body {
     background: rgba(0, 0, 0, 0.733);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
@@ -69,7 +71,7 @@ card {
     background-color: aqua;
     padding: 0px;
     text-align: center;
-
+ 
 }
 
 .weatherFuture {
@@ -81,9 +83,14 @@ card {
 #day1 {
     background-color: darkgray;
     padding-left: 20px;
-    font-size: 30px;
+    font-size: 20px;
     text-align: left;
 
+}
+
+#day1:hover {
+    background-color: rgba(199, 10, 199, 0.363);
+    color: azure;
 }
 
 #searchBtn {
@@ -95,4 +102,15 @@ card {
 
 #searchBtn:hover {
     background-color: darkkhaki;
+}
+
+.future{
+    min-height: 20vh;
+}
+#day2:hover,
+#day3:hover,
+#day4:hover,
+#day5:hover {
+    background-color: rgba(199, 10, 199, 0.363);
+    color: azure;
 }
