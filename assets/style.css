@@ -1,3 +1,4 @@
+
 body {
     background: rgba(0, 0, 0, 0.733);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
@@ -14,7 +15,8 @@ body {
 }
 
 section {
-    padding: 0px;
+    padding: 10px;
+    text-align: left;
 }
 
 aside {
@@ -34,12 +36,7 @@ aside {
     margin-right: 0px;
 }
 
-.future {
-    border: rgba(238, 190, 227, 0.411) 2px dashed;
-    padding: 0px;
-    margin-right: 18px;
 
-}
 
 input,
 button,
@@ -62,7 +59,7 @@ card {
     left: 20%;
     height: 5%;
     width: 60%;
-    margin: 2px;
+    
     background: rgba(238, 130, 238, 0.363);
 
 }
@@ -70,8 +67,6 @@ card {
 #weatherBar {
 
     background-color: aqua;
-    width: 80vh;
-    height: 30vh;
     padding: 0px;
     text-align: center;
 
@@ -85,9 +80,9 @@ card {
 
 #day1 {
     background-color: darkgray;
-    padding: 0px;
+    padding-left: 20px;
     font-size: 30px;
-    text-align: center;
+    text-align: left;
 
 }
 

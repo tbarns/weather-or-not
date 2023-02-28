@@ -35,11 +35,12 @@ function fiveDay(lat, lon) {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`)
         .then(function (response) {
             return response.json();
+            
         })
        
         .then(function (data) {
 
-            // console.log(data)
+             console.log(data)
             //this set of variabel displays the day of the week for the future forecasts
             var today = moment().format('dddd');
             var day2Day = moment().add(1, 'days').format('dddd');
@@ -54,7 +55,7 @@ function fiveDay(lat, lon) {
             var iconUrl = `https://openweathermap.org/img/w/${weatherIcon}.png`
 
 
-            var day1City = $("<p>").append("City: ", city)
+            var day1City = $("<p>").append("Today in ", city)
             var day1Temp = $("<p>").append("Temp: ", temp, "°F")
             var day1Humidity = $("<p>").append("Humidity: ", humidity, "%")
             var day1Wind = $("<p>").append("Windspeed: ", windSpeed, "mph")
