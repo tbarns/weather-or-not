@@ -1,178 +1,173 @@
-//connects to open weather one call AP
-var today = moment();
-var apiKey = "f134c88b914b12f6422fd757a1b6307c"
-var searchBar = document.querySelector("input")
-var city;
+// Define constants and variables at the top, and use let or const instead of var
+const apiKey = "f134c88b914b12f6422fd757a1b6307c";
+let city;
+// Helper function to capitalize the first letter of each word
+const capitalizeWords = str => {
+    return str.replace(/\w\S*/g, word => {
+        return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
+    });
+};
 
-function getCity(city) {
-    city = $("input").val()
 
-    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-    appendHistory(city)
 
-    //connects to the API to get inforation about location searched  byt the user
+const getCity = () => {
+    city = capitalizeWords($("input").val());
+    const queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+    appendHistory(city);
+
     fetch(queryURL)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            // console.log(data)
+        .then(response => response.json())
+        .then(data => {
+            const { lon, lat } = data.coord; // use destructuring to avoid repetitive data.coord
+            fiveDay(lat, lon);
+        });
+};
 
-            var lon = data.coord.lon
-            var lat = data.coord.lat
-            fiveDay(lat, lon)
 
-        })
-}
-function appendHistory(city) {
-    var history = $("<div>").text(city).addClass("card")
+const appendHistory = city => {
+    const history = $("<div>").text(city).addClass("card");
     $("#history").append(history);
 
+    // Update local storage with each new search
+    const storedHistory = JSON.parse(localStorage.getItem("history")) || [];
+    // Check if the city is already in the stored history
+    if (storedHistory.indexOf(city) === -1) {
+        const history = $("<div>").text(city).addClass("card");
+        $("#history").append(history);
+        updateLocalStorage(city);
+    }
+};
+
+// New function to update local storage with a new city
+const updateLocalStorage = city => {
+    const storedHistory = JSON.parse(localStorage.getItem("history")) || [];
+    storedHistory.push(city);
+    localStorage.setItem("history", JSON.stringify(storedHistory));
+};
+
+
+const clearHistory = () => {
+    // Empty the history section
+    $("#history").empty();
+
+    // Add the input, search button and clear button back to the history section
+    const input = $('<input>').addClass('col-md-10').attr('placeholder', 'Type your next location here');
+    const searchBtn = $('<button>').addClass('col-md-10').attr('id', 'searchBtn').text('SEARCH');
+    const clearBtn = $('<button>').addClass('col-md-10').attr('id', 'clearBtn').text('CLEAR HISTORY');
+    $("#history").append(input, '<br><br>', searchBtn, '<br>', clearBtn);
+
+    // Clear the local storage
+    localStorage.removeItem("history");
+
+    // Re-assign the event listeners
+    $("#searchBtn").on("click", getCity);
+    $("#clearBtn").on("click", clearHistory);
+    $("#history").on("click", ".card", function () {
+        const city = $(this).text();
+        $("input").val(city);
+        getCity();
+    });
+};
+
+// Add event listener to the "CLEAR HISTORY" button
+$("#clearBtn").on("click", clearHistory);
+
+
+const fiveDay = (lat, lon) => {
+    city = $("input").val();
+
+    fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
+    )
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+
+            // Use an array and loop to handle future days
+            const days = ["Today", "Tomorrow", moment().add(2, "days").format("dddd"), moment().add(3, "days").format("dddd"), moment().add(4, "days").format("dddd")];
+            days.forEach((day, index) => {
+                const temp = data.list[index * 8].main.temp;
+                const humidity = data.list[index * 8].main.humidity;
+                const windSpeed = data.list[index * 8].wind.speed;
+                const weatherIcon = data.list[index * 8].weather[0].icon;
+                const iconUrl = `https://openweathermap.org/img/w/${weatherIcon}.png`;
+
+                const dayCity = $("<p>").append(`${day} in ${city}`);
+                const dayTemp = $("<p>").append(`Temp: ${temp} °F`);
+                const dayHumidity = $("<p>").append(`Humidity: ${humidity}%`);
+                const dayWind = $("<p>").append(`Windspeed: ${windSpeed} mph`);
+                const iconImage = $("<img>").attr("src", iconUrl);
+
+                $(`#day${index + 1}`).empty(); // Use template literals and string interpolation to simplify code
+                $(`#day${index + 1}`).append(dayCity, dayTemp, dayWind, dayHumidity, iconImage);
+            });
+        });
+};
+
+$("#searchBtn").on("click", () => {
+    getCity();
+    updateLocalStorage(capitalizeWords($("input").val()));
+});
+const title = $("<p>").text("5-day weather forecast");
+
+// Use moment.js to format the current date
+$("#currentDay").text(moment().format("dddd, MMM Do, YYYY"));
+$("#currentDay").append(title);
+
+// Store search history in local storage and retrieve it on page load
+const history = JSON.parse(localStorage.getItem("history")) || [];
+history.forEach(city => appendHistory(city));
+$("#history").on("click", ".card", function () {
+    const city = capitalizeWords($(this).text());
+    $("input").val(city);
+    getCity();
+});
+
+
+
+
+
+// Function to render the history cards based on the current page
+const renderHistory = currentPage => {
+    const itemsPerPage = 5;
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const storedHistory = JSON.parse(localStorage.getItem("history")) || [];
+  
+    // Clear the history section
+    $("#history").empty();
+  
+    // Add the input, search button, and clear button back to the history section
+    const input = $('<input>').addClass('col-md-10').attr('placeholder', 'Type your next location here');
+    const searchBtn = $('<button>').addClass('col-md-10').attr('id', 'searchBtn').text('SEARCH');
+    const clearBtn = $('<button>').addClass('col-md-10').attr('id', 'clearBtn').text('CLEAR HISTORY');
+    $("#history").append(input, '<br><br>', searchBtn, '<br>', clearBtn);
+  
+
+// Add history cards for the current page
+storedHistory.slice(startIndex, endIndex).forEach(city => appendHistory(city));
+
+
+
+
+// Render the pagination
+const totalPages = Math.ceil(storedHistory.length / itemsPerPage);
+const pagination = $('<nav>').attr('aria-label', 'History pagination');
+const paginationUl = $('<ul>').addClass('pagination');
+for (let i = 1; i <= totalPages; i++) {
+    const paginationLi = $('<li>').addClass('page-item').toggleClass('active', i === currentPage);
+    const paginationLink = $('<a>').addClass('page-link').attr('href', '#').text(i);
+    paginationLi.append(paginationLink);
+    paginationUl.append(paginationLi);
 }
-function fiveDay(lat, lon) {
-    city = $("input").val()
-
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`)
-        .then(function (response) {
-            return response.json();
-            
-        })
-       
-        .then(function (data) {
-
-             console.log(data)
-            //this set of variabel displays the day of the week for the future forecasts
-            var today = moment().format('dddd');
-            var day2Day = moment().add(1, 'days').format('dddd');
-            var day3Day = moment().add(2, 'days').format('dddd')
-            var day4Day = moment().add(3, 'days').format('dddd')
-            var day5Day = moment().add(4, 'days').format('dddd')
-
-            var temp = data.list[0].main.temp
-            var humidity = data.list[0].main.humidity
-            var windSpeed = data.list[0].wind.speed
-            var weatherIcon = data.list[0].weather[0].icon
-            var iconUrl = `https://openweathermap.org/img/w/${weatherIcon}.png`
+$("#history").append(pagination);
+$("#history").on("click", ".page-link", function (event) {
+    event.preventDefault();
+    const newPage = parseInt($(this).text());
+    renderHistory(newPage);
+});
+};
 
 
-            var day1City = $("<p>").append("Today in ", city)
-            var day1Temp = $("<p>").append("Temp: ", temp, "°F")
-            var day1Humidity = $("<p>").append("Humidity: ", humidity, "%")
-            var day1Wind = $("<p>").append("Windspeed: ", windSpeed, "mph")
-            var iconImage = $("<img>").attr({ src: iconUrl })
-            $("#day1").empty()
-
-            $("#day1").append(day1Temp);
-            $("#day1").append(day1Wind);
-            $("#day1").append(day1Humidity);
-            $("#day1").append(today)
-            $("#day1").prepend(iconImage)
-            $("#day1").prepend(day1City);
-
-
-            // var today = moment().format('dddd');
-            //this handles day 2 of the furutre weather 
-            //i know that this could be handled more efficiantly with a for loop, however the 2 reasons i am not doing that is 1: i need more practice understading JS and how it functions and 2: the for loop is something i understand but not well enough to impliment it for so many different variable so i want to avoid issues within the time constraints of the homework.
-
-
-            var temp2 = data.list[8].main.temp
-            var humidity2 = data.list[8].main.humidity
-            var windSpeed2 = data.list[8].wind.speed
-            var weatherIcon2 = data.list[8].weather[0].icon
-            var iconUrl2 = `https://openweathermap.org/img/w/${weatherIcon2}.png`
-
-            var day2City = $("<p>").append("City: ", city)
-            var day2Temp = $("<p>").append("Temp: ", temp2, "°F")
-            var day2Humidity = $("<p>").append("Humidity: ", humidity2, "%")
-            var day2Wind = $("<p>").append("Windspeed: ", windSpeed2, "mph")
-            var iconImage2 = $("<img>").attr({ src: iconUrl2 })
-
-            $("#day2").empty()
-            $("#day2").append(day2City);
-            $("#day2").append(day2Temp);
-            $("#day2").append(day2Wind);
-            $("#day2").append(day2Humidity);
-            $("#day2").append(day2Day)
-            $("#day2").append(iconImage2)
-
-            //this handles day 3 of the furutre weather 
-            var temp3 = data.list[16].main.temp
-            var humidity3 = data.list[16].main.humidity
-            var windSpeed3 = data.list[16].wind.speed
-            var weatherIcon3 = data.list[16].weather[0].icon
-            var iconUrl3 = `https://openweathermap.org/img/w/${weatherIcon3}.png`
-
-            var day3City = $("<p>").append("City: ", city)
-            var day3Temp = $("<p>").append("Temp: ", temp3, "°F")
-            var day3Humidity = $("<p>").append("Humidity: ", humidity3, "%")
-            var day3Wind = $("<p>").append("Windspeed: ", windSpeed3, "mph")
-            var iconImage3 = $("<img>").attr({ src: iconUrl3 })
-
-            $("#day3").empty()
-            $("#day3").append(day3City);
-            $("#day3").append(day3Temp);
-            $("#day3").append(day3Wind);
-            $("#day3").append(day3Humidity);
-            $("#day3").append(day3Day)
-            $("#day3").append(iconImage3)
-
-            //this handles day 4 of the furutre weather 
-            var temp4 = data.list[24].main.temp
-            var humidity4 = data.list[24].main.humidity
-            var windSpeed4 = data.list[24].wind.speed
-            var weatherIcon4 = data.list[24].weather[0].icon
-            var iconUrl4 = `https://openweathermap.org/img/w/${weatherIcon4}.png`
-
-            var day4City = $("<p>").append("City: ", city)
-            var day4Temp = $("<p>").append("Temp: ", temp4, "°F")
-            var day4Humidity = $("<p>").append("Humidity: ", humidity4, "%")
-            var day4Wind = $("<p>").append("Windspeed: ", windSpeed4, "mph")
-            var iconImage4 = $("<img>").attr({ src: iconUrl4 })
-
-            $("#day4").empty()
-            $("#day4").append(day4City);
-            $("#day4").append(day4Temp);
-            $("#day4").append(day4Wind);
-            $("#day4").append(day4Humidity);
-            $("#day4").append(day4Day)
-            $("#day4").append(iconImage4)
-
-
-            //this handles day 5 of the furutre weather 
-            var temp5 = data.list[32].main.temp
-            var humidity5 = data.list[32].main.humidity
-            var windSpeed5 = data.list[32].wind.speed
-            var weatherIcon5 = data.list[32].weather[0].icon
-            var iconUrl5 = `https://openweathermap.org/img/w/${weatherIcon5}.png`
-
-            var day5City = $("<p>").append("City: ", city)
-            var day5Temp = $("<p>").append("Temp: ", temp5, "°F")
-            var day5Humidity = $("<p>").append("Humidity: ", humidity5, "%")
-            var day5Wind = $("<p>").append("Windspeed: ", windSpeed5, "mph")
-            var iconImage5 = $("<img>").attr({ src: iconUrl5 })
-
-            $("#day5").empty()
-            $("#day5").append(day5City);
-            $("#day5").append(day5Temp);
-            $("#day5").append(day5Wind);
-            $("#day5").append(day5Humidity);
-            $("#day5").append(day5Day)
-            $("#day5").append(iconImage5)
-
-        })
-}
-
-$("#searchBtn").on("click", getCity)
-
-
-var title = $("<p>").text("5-day weather forecast")
-
-// displays and date 
-$("#currentDay").text(today.format("dddd, MMM Do, YYYY"));
-$("#currentDay").append(title)
-
-
-
-// //local storage that contains city serach history
-// //when i click a city in history i am displayed current and future conditions
-//i know that local storage here is complicated because my function is so repetaive.  I need to figure out how to save the data from the function into local storage and how to make the history cards an event to trick the retrieval of the localstorage.
+// Call renderHistory on page load
+renderHistory(1);

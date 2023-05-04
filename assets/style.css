@@ -1,57 +1,89 @@
 * {
-user-select: none;
-}
-body {
-    background: rgba(0, 0, 0, 0.733);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-}
-
-.jumbotron {
+    user-select: none;
+  }
+  
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh; /* set the height of the body to fill the viewport */
+    margin: 0;
     background: aquamarine;
-    border-radius: 0px;
-    font-family: 'Alfa Slab One', cursive;
+    padding-bottom: 5rem; /* or whatever height you set for #weatherBar */
+    position: relative;
+  }
+  
+  .jumbotron {
+    background: aquamarine;
+    border-radius: 0;
+    font-family: "Alfa Slab One", cursive;
     font-size: 30px;
     color: rgb(8, 7, 5);
     padding: 25px;
-
-}
-
-section {
+  }
+  #clearBtn {
+    background-color: aquamarine;
+    font-weight: 300;
+    display: block;
+    border-radius: 15px;
+    margin-top: 1rem;
+  }
+  
+  #clearBtn:hover {
+    background-color: darkkhaki;
+  }
+  
+  section {
     padding: 10px;
     text-align: left;
-}
-
-aside {
-    background-color: bisque;
+  }
+  
+  aside {
+    background-color: aquamarine;
     height: 50vh;
     padding: 0px;
-}
+    z-index: -1;
+  }
+  
+  #history {
+    background-color: bisque;
+    padding: 0;
+    position: relative;
+  }
+  main:hover{
+    z-index: 1;
+  }
 
-#history {
-    padding: 0px;
-}
 
-.row {
+  #history .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin-top: 1rem;
+    padding: 0;
+  
+  }
+
+  .row {
     position: relative;
     top: -34px;
     margin-left: 0px;
     margin-right: 0px;
-}
-
-
-
-input,
-button,
-card {
+  }
+ 
+  input,
+  button
+   {
+    user-select: auto;
     margin: 0;
     position: absolute;
     top: 5%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-
-.card {
-
+  }
+  
+  .card {
     justify-content: center;
     align-items: center;
     border-radius: 20px;
@@ -61,56 +93,94 @@ card {
     left: 20%;
     height: 5%;
     width: 60%;
-    
     background: rgba(238, 130, 238, 0.363);
-
-}
-
-#weatherBar {
-
-    background-color: aqua;
+  }
+  
+  #weatherBar {
+    background-color: aquamarine;
     padding: 0px;
     text-align: center;
- 
-}
-
-.weatherFuture {
-
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 5rem;
+  }
+  
+  .weatherFuture {
     background: rgba(199, 10, 199, 0.363);
-
-}
-
-#day1 {
-    background-color: darkgray;
+  }
+  
+  #day1 {
     padding-left: 20px;
     font-size: 20px;
     text-align: left;
-
-}
-
-#day1:hover {
-    background-color: rgba(199, 10, 199, 0.363);
+    height: calc(100vh - 50vh); /* set the height to take up the remaining space */
+    margin-bottom: 2rem; /* add margin to move the weather bar down */
+  }
+  
+  #day1:hover {
     color: azure;
-}
+    background-color: rgb(62, 62, 62);
+    z-index: 1;
+  }
+  
 
-#searchBtn {
+  #searchBtn {
     background-color: aquamarine;
     font-weight: 300;
     display: block;
     border-radius: 15px;
-}
-
-#searchBtn:hover {
+  }
+  
+  #searchBtn:hover {
     background-color: darkkhaki;
-}
-
-.future{
+  }
+  
+  .future {
     min-height: 20vh;
-}
-#day2:hover,
-#day3:hover,
-#day4:hover,
-#day5:hover {
-    background-color: rgba(199, 10, 199, 0.363);
+  }
+  
+  #day2:hover,
+  #day3:hover,
+  #day4:hover,
+  #day5:hover {
     color: azure;
-}
+    z-index: 1;
+    background-color: rgb(62, 62, 62);
+  }
+  
+  .weather-card {
+    transition: all 0.5s;
+    border: 2px dashed black;
+    background-color: darkgray;
+  }
+  .weather-card:hover {
+    transform: scale(1.15);
+    z-index: 1;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .main:hover .weather-card:not(:hover) {
+    opacity: 0.7;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    aside {
+      height: auto;
+    }
+  
+    .card {
+      top: 10%;
+      height: 8%;
+      width: 80%;
+    }
+  
+    .future {
+      min-height: 25vh;
+    }
+  
+    #day1 {
+      font-size: 18px;
+    }
+  }
+  
