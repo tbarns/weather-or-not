@@ -2,63 +2,49 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/style.css" />
-
     <title>Weather or not</title>
 </head>
 
-<body class=" justify-content-center">
-    <header id="currentDay" class="col-12 jumbotron">
+<body>
+    <header id="currentDay" class="col-12 jumbotron"></header>
+    <aside class="col-md-2 d-md-none justify-content-center" id="history-mobile">
+        <div class="col-md-10">
+            <input placeholder="where?" />
+        </div>
+        <div class="col-md-10">
+            <button id="searchBtn">SEARCH</button>
+        </div>
+        <div class="col-md-10">
+            <button id="clearBtn">CLEAR HISTORY</button>
+        </div>
+    </aside>
+    <main class="container">
+        <div class="row">
 
-    </header>
-    <main class="row">
-        <aside class="col-4 justify-content-center" id="history">
-            <input class="col-md-10" placeholder="type your next location here">
-            <br><br>
-            <button class="col-md-10" id="searchBtn">SEARCH:</button>
-            <br>
-            <!-- <div class="card"></div> -->
-        </aside>
+            <aside class="col-md-2 d-none d-md-block" id="history"></aside>
+            <div class="col-md-8">
+                <section class="weatherFuture weather-card" id="day1"></section>
+                <div class="row col-12 justify-content-center" id="weatherBar">
+                    <section class="col-md-3 future weather-card" id="day2"></section>
+                    <section class="col-md-3 future weather-card" id="day3"></section>
 
+                    <section class="col-md-3 future weather-card" id="day4"></section>
+                    <section class="col-md-3 future weather-card" id="day5"></section>
 
-        <section class="col-8 justify-content-center weatherFuture" id="day1">
-            
-
-            <!-- holds the data fetched from the API 
-            needs to be repeated for each day displayed -->
-
-        </section>
-
-        <div class="row col-12 justify-content-end" id="weatherBar">
-
-            <section class="col-2 future" id="day2">
-
-            </section>
-            <section class="col-2 future" id="day3">
-
-
-            </section>
-            <section class="col-2 future" id="day4">
-
-
-            </section>
-            <section class="col-2 future" id="day5">
-
-
-            </section>
-
+                </div>
+            </div>
+          
         </div>
     </main>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-
-
-    <!-- scripts for Jquery moment.js and my JS file -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="assets/script.js"></script>
 </body>
