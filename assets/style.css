@@ -73,9 +73,15 @@ aside {
   margin: 0 auto;
 }
 
+.city-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
 #history-mobile {
   display: block;
-  position:absolute;
+  position: absolute;
   top: auto;
 }
 
@@ -200,12 +206,15 @@ Weather Future Styles .weatherFuture {
   background-color: darkkhaki;
   transition: all 0.3s ease;
 }
+
 #history-mobile {
   display: none;
 }
+
 #history-mobile.show {
   display: block;
 }
+
 /* Weather Future Styles */
 .weatherFuture {
   background: rgba(199, 21, 133, 0.4);
@@ -246,81 +255,83 @@ Weather Future Styles .weatherFuture {
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
   .row {
-      flex-direction: column;
+    flex-direction: column;
   }
 
   .jumbotron {
-      font-size: 20px;
-      display: block;
+    font-size: 20px;
+    display: block;
   }
 
   .wrapper {
-      order: 1; /* Add this line */
+    order: 1;
+    /* Add this line */
   }
 
- 
 
- 
+
+
   #history+.col-md-8 {
-      margin-top: 5rem;
-      order: 1; /* Change this line */
-      margin-top: 0; 
+    margin-top: 5rem;
+    order: 1;
+    /* Change this line */
+    margin-top: 0;
   }
 
   #history-pagination {
-      position: static;
-      transform: none;
-      margin-top: 1rem;
+    position: static;
+    transform: none;
+    margin-top: 1rem;
   }
 
   .weather-card {
-      width: 100%;
-      margin: 0;
-      margin-bottom: 2rem;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 2rem;
   }
 
   #day1 {
-      height: auto;
-      margin-bottom: 2rem;
+    height: auto;
+    margin-bottom: 2rem;
   }
 
   #weatherBar {
-      height: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   #history button {
-      width: 100px;
-      /* Adjust the width of the button */
+    width: 100px;
+    /* Adjust the width of the button */
   }
 
   #day2,
   #day3,
   #day4,
   #day5 {
-      margin-bottom: 2rem;
+    margin-bottom: 2rem;
   }
 
   .card {
-      left: 10%;
-      width: 80%;
+    left: 10%;
+    width: 80%;
   }
 
-/* Added to recreate history in the history-mobile section */
-#history-mobile {
-  position: static;
-  display: block;
-  order: 1;
-}
+  /* Added to recreate history in the history-mobile section */
+  #history-mobile {
+    position: static;
+    display: block;
+    order: 1;
+  }
 
-#history-mobile.show {
-  display: block;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  
-}
+  #history-mobile.show {
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+
+  }
 }
