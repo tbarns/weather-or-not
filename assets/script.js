@@ -10,7 +10,9 @@ const capitalizeWords = str => {
 const getCity = () => {
     city = capitalizeWords($("#input").val());
     if (!city) {
-        alert("Please enter a city name.");
+        const errorBox = $("<div>").addClass("alert alert-danger").attr("role", "alert")
+            .text("Please enter a city name.");
+        $("#searchBox").append(errorBox);
         return;
     }
     const queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
@@ -25,7 +27,7 @@ const getCity = () => {
         })
         .then(data => {
             const { lon, lat } = data.coord;
-            fiveDay(lat, lon);
+            fiveDay(lat, lon, city);
         })
         .catch(error => {
             console.error('Error fetching data:', error);
@@ -55,9 +57,7 @@ const clearHistory = () => {
 
 $("#clearBtn").on("click", clearHistory);
 
-const fiveDay = (lat, lon) => {
-    city = $("input").val();
-    console.log('faivedayfunction')
+const fiveDay = (lat, lon, city) => {
     fetch(
         `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
     )
@@ -76,7 +76,7 @@ const fiveDay = (lat, lon) => {
                 const windSpeed = data.list[index * 8].wind.speed;
                 const weatherIcon = data.list[index * 8].weather[0].icon;
                 const iconUrl = `https://openweathermap.org/img/w/${weatherIcon}.png`;
-
+                const cityName = $("<div>").addClass("city-name").text(city);
                 const dayCity = $("<p>").append(`${day} in ${city}`);
                 const dayTemp = $("<p>").append(`Temp: ${temp} °F`);
                 const dayHumidity = $("<p>").append(`Humidity: ${humidity}%`);
@@ -84,7 +84,8 @@ const fiveDay = (lat, lon) => {
                 const iconImage = $("<img>").attr("src", iconUrl);
 
                 $(`#day${index + 1}`).empty();
-                $(`#day${index + 1}`).append(dayCity, dayTemp, dayWind, dayHumidity, iconImage);
+                $(`#day${index + 1}`).append(cityName, dayCity, dayTemp, dayWind, dayHumidity, iconImage);
+
             });
         });
 };

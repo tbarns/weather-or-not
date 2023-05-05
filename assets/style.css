@@ -72,7 +72,11 @@ aside {
   display: block;
   margin: 0 auto;
 }
-
+.city-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
 #history-mobile {
   display: block;
   position:absolute;
