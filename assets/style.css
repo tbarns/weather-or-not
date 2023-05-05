@@ -1,186 +1,320 @@
 * {
-    user-select: none;
-  }
-  
-  body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    height: 100vh; /* set the height of the body to fill the viewport */
-    margin: 0;
-    background: aquamarine;
-    padding-bottom: 5rem; /* or whatever height you set for #weatherBar */
-    position: relative;
-  }
-  
-  .jumbotron {
-    background: aquamarine;
-    border-radius: 0;
-    font-family: "Alfa Slab One", cursive;
-    font-size: 30px;
-    color: rgb(8, 7, 5);
-    padding: 25px;
-  }
-  #clearBtn {
-    background-color: aquamarine;
-    font-weight: 300;
-    display: block;
-    border-radius: 15px;
-    margin-top: 1rem;
-  }
-  
-  #clearBtn:hover {
-    background-color: darkkhaki;
-  }
-  
-  section {
-    padding: 10px;
-    text-align: left;
-  }
-  
-  aside {
-    background-color: aquamarine;
-    height: 50vh;
-    padding: 0px;
-    z-index: -1;
-  }
-  
-  #history {
-    background-color: bisque;
-    padding: 0;
-    position: relative;
-  }
-  main:hover{
-    z-index: 1;
-  }
+  user-select: none;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  margin: 0;
+  background: aquamarine;
+  padding-bottom: 5rem;
+  overflow-y: scroll;
+  /* Added to allow scrolling */
+}
+
+input,
+button {
+  user-select: auto;
+}
+
+/* Jumbotron Styles */
+.jumbotron {
+  background: aquamarine;
+  border-radius: 0;
+  font-family: "Alfa Slab One", cursive;
+  font-size: 30px;
+  color: rgb(8, 7, 5);
+  padding: 25px;
+
+}
+
+/* Clear Button Styles */
+#clearBtn {
+  background-color: aquamarine;
+  font-weight: 300;
+  display: block;
+  border-radius: 15px;
+  margin-top: 1rem;
+}
+
+#clearBtn:hover {
+  background-color: darkkhaki;
+  transition: all 0.3s ease;
+}
+
+/* Section Styles */
+section {
+  padding: 10px;
+  text-align: left;
+}
+
+/* Aside Styles */
+aside {
+  background-color: aquamarine;
+  height: 50vh;
+  padding: 0px;
+
+}
+
+/* History Styles */
+#history {
+  background-color: bisque;
+  padding: 0;
+  position: relative;
+  height: 100%;
+  padding-top: 3rem;
+  order: -1;
+  /* Added to position history on the far left */
+}
+
+#history-mobile {
+  display: block;
+  position:absolute;
+  top: auto;
+}
+
+/* History Card Styles */
+#history .card {
+  font-family: fantasy;
+  letter-spacing: calc(1 * .13rem);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+/* Pagination Styles */
+#history-pagination {
+  position: fixed;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-70%);
+}
+
+/* Row Styles */
+.row {
+  position: relative;
+  top: -34px;
+  margin-left: 0px;
+  margin-right: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  /* Added to wrap the elements when necessary */
+}
+
+/* Input and Button Styles */
+input {
+  margin: 0;
+  position: relative;
+  display: block;
+  z-index: 1;
+}
+
+button {
+  margin: 0.5rem 0;
+  position: relative;
+  display: block;
+  z-index: 1;
+}
 
 
-  #history .card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    margin-top: 1rem;
-    padding: 0;
-  
-  }
 
+/* Card Styles */
+.card {
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  margin: 0;
+  position: relative;
+  top: 5%;
+  left: 20%;
+  height: 5%;
+  width: 60%;
+  background: rgba(238, 130, 238, 0.363);
+  transition: all 0.6s ease;
+  box-shadow: 1 1 3 rgba(0, 0, 0, 0.2);
+}
+
+.weather-card {
+  background-color: rgba(238, 130, 238, 0.363);
+  transition: all 0.6s ease;
+}
+
+.weather-card:hover {
+  background-color: rgb(62, 62, 62);
+  color: azure;
+  z-index: 1;
+}
+
+/* Weather Bar Styles */
+#weatherBar {
+  background-color: aquamarine;
+  padding: 0px;
+  text-align: center;
+  height: 8rem;
+  font-size: calc(1 * .95rem);
+  ;
+}
+
+Weather Future Styles .weatherFuture {
+  background: rgba(199, 10, 199, 0.363);
+}
+
+/* Day 1 Styles */
+#day1 {
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  padding-left: 20px;
+  font-size: 20px;
+  text-align: left;
+  height: calc(100vh - 50vh);
+  margin-bottom: 2rem;
+}
+
+#day1:hover {
+  color: azure;
+  background-color: rgb(62, 62, 62);
+  z-index: 1;
+}
+
+/* Search Button Styles */
+#searchBtn {
+  background-color: aquamarine;
+  font-weight: 300;
+  display: block;
+  border-radius: 15px;
+}
+
+#searchBtn:hover {
+  background-color: darkkhaki;
+  transition: all 0.3s ease;
+}
+#history-mobile {
+  display: none;
+}
+#history-mobile.show {
+  display: block;
+}
+/* Weather Future Styles */
+.weatherFuture {
+  background: rgba(199, 21, 133, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  margin: 1rem;
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.weatherFuture:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Weather Icon Styles */
+.weatherIcon {
+  width: 50px;
+  height: 50px;
+}
+
+/* Weather Temperature Styles */
+.weatherTemperature {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Weather Date Styles */
+.weatherDate {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
   .row {
-    position: relative;
-    top: -34px;
-    margin-left: 0px;
-    margin-right: 0px;
+      flex-direction: column;
   }
- 
-  input,
-  button
-   {
-    user-select: auto;
-    margin: 0;
-    position: absolute;
-    top: 5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  .card {
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    margin: 0;
-    position: relative;
-    top: 5%;
-    left: 20%;
-    height: 5%;
-    width: 60%;
-    background: rgba(238, 130, 238, 0.363);
-  }
-  
-  #weatherBar {
-    background-color: aquamarine;
-    padding: 0px;
-    text-align: center;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    height: 5rem;
-  }
-  
-  .weatherFuture {
-    background: rgba(199, 10, 199, 0.363);
-  }
-  
-  #day1 {
-    padding-left: 20px;
-    font-size: 20px;
-    text-align: left;
-    height: calc(100vh - 50vh); /* set the height to take up the remaining space */
-    margin-bottom: 2rem; /* add margin to move the weather bar down */
-  }
-  
-  #day1:hover {
-    color: azure;
-    background-color: rgb(62, 62, 62);
-    z-index: 1;
-  }
-  
 
-  #searchBtn {
-    background-color: aquamarine;
-    font-weight: 300;
-    display: block;
-    border-radius: 15px;
+  .jumbotron {
+      font-size: 20px;
+      display: block;
   }
-  
-  #searchBtn:hover {
-    background-color: darkkhaki;
+
+  .wrapper {
+      order: 1; /* Add this line */
   }
-  
-  .future {
-    min-height: 20vh;
+
+ 
+
+ 
+  #history+.col-md-8 {
+      margin-top: 5rem;
+      order: 1; /* Change this line */
+      margin-top: 0; 
   }
-  
-  #day2:hover,
-  #day3:hover,
-  #day4:hover,
-  #day5:hover {
-    color: azure;
-    z-index: 1;
-    background-color: rgb(62, 62, 62);
+
+  #history-pagination {
+      position: static;
+      transform: none;
+      margin-top: 1rem;
   }
-  
+
   .weather-card {
-    transition: all 0.5s;
-    border: 2px dashed black;
-    background-color: darkgray;
+      width: 100%;
+      margin: 0;
+      margin-bottom: 2rem;
   }
-  .weather-card:hover {
-    transform: scale(1.15);
-    z-index: 1;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .main:hover .weather-card:not(:hover) {
-    opacity: 0.7;
-  }
-  
-  @media only screen and (max-width: 767px) {
-    aside {
+
+  #day1 {
       height: auto;
-    }
-  
-    .card {
-      top: 10%;
-      height: 8%;
-      width: 80%;
-    }
-  
-    .future {
-      min-height: 25vh;
-    }
-  
-    #day1 {
-      font-size: 18px;
-    }
+      margin-bottom: 2rem;
   }
-  
+
+  #weatherBar {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  #history button {
+      width: 100px;
+      /* Adjust the width of the button */
+  }
+
+  #day2,
+  #day3,
+  #day4,
+  #day5 {
+      margin-bottom: 2rem;
+  }
+
+  .card {
+      left: 10%;
+      width: 80%;
+  }
+
+/* Added to recreate history in the history-mobile section */
+#history-mobile {
+  position: static;
+  display: block;
+  order: 1;
+}
+
+#history-mobile.show {
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  background-color:pink
+}
+}

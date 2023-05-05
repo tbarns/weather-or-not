@@ -8,17 +8,31 @@ const capitalizeWords = str => {
 };
 
 const getCity = () => {
-    city = capitalizeWords($("input").val());
+    city = capitalizeWords($("#input").val());
+    if (!city) {
+        alert("Please enter a city name.");
+        return;
+    }
     const queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     updateLocalStorage(city);
-    console.log('click')
+    console.log(`click  ${city}`);
     fetch(queryURL)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error: ${response.statusText}`);
+            }
+            return response.json();
+        })
         .then(data => {
             const { lon, lat } = data.coord;
             fiveDay(lat, lon);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            alert("Error fetching data: " + error);
         });
 };
+
 
 const appendHistory = city => {
     const history = $("<div>").text(city).addClass("card");
@@ -37,14 +51,13 @@ const updateLocalStorage = city => {
 const clearHistory = () => {
     localStorage.removeItem("history");
     renderHistory(1);
-    console.log('clearedHistory')
 };
 
 $("#clearBtn").on("click", clearHistory);
 
 const fiveDay = (lat, lon) => {
     city = $("input").val();
-console.log("fivedayfunction")
+    console.log('faivedayfunction')
     fetch(
         `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
     )
@@ -75,12 +88,16 @@ console.log("fivedayfunction")
             });
         });
 };
+$(".history-btn").on("click", function () {
+    $("#history-mobile").toggleClass("show");
+});
 
-$("#searchBtn").on("click", (event) => {
-    console.log('searchClick')
+$(document).on("click", "#searchBtn, #history-mobile #searchBtn", (event) => {
     event.preventDefault();
     getCity();
 });
+
+$("#history").on("click", "#clearBtn", clearHistory);
 
 $("#currentDay").text(moment().format("dddd, MMM Do, YYYY"));
 $("#currentDay").append($("<p>").text("5-day weather forecast"));
@@ -93,23 +110,15 @@ const renderHistory = currentPage => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const storedHistory = JSON.parse(localStorage.getItem("history")) || [];
-    console.log('renderHistory')
     // Clear the history section
     $("#history").empty();
 
     // Add the input, search button, and clear button back to the history section
-    const input = $('<input>').addClass('col-md-10').attr('placeholder', 'Type your next location here');
+    const input = $('<input>').addClass('col-md-10').attr('placeholder', 'where?').attr('id', 'input');
     const searchBtn = $('<button>').addClass('col-md-10').attr('id', 'searchBtn').text('SEARCH');
     const clearBtn = $('<button>').addClass('col-md-10').attr('id', 'clearBtn').text('CLEAR HISTORY');
     $("#history").append(input, '<br><br>', searchBtn, '<br>', clearBtn);
 
-    $("#searchBtn").on("click", (event) => {
-        console.log('searchClick');
-        event.preventDefault();
-        getCity();
-    });
-
-    $("#clearBtn").on("click", clearHistory);
 
 
     // Add history cards for the current page
@@ -132,6 +141,7 @@ const renderHistory = currentPage => {
     $("#history").append(pagination);
     $("#history").on("click", ".page-link", function (event) {
         event.preventDefault();
+        pagination.attr('id', 'history-pagination');
         const newPage = parseInt($(this).text());
         renderHistory(newPage);
     });
@@ -145,3 +155,28 @@ $("#history").on("click", ".card", function () {
     $("input").val(city);
     getCity();
 });
+
+$(window).on('resize', () => {
+    const isMobile = window.matchMedia('screen and (max-width: 576px)').matches;
+
+    if (isMobile) {
+        $('#history').hide();
+        $('#history-mobile').addClass('show');
+        renderMobileHistory();
+    } else {
+        $('#history').show();
+        $('#history-mobile').removeClass('show');
+    }
+});
+
+
+const renderMobileHistory = () => {
+    const storedHistory = JSON.parse(localStorage.getItem("history")) || [];
+    const historyContainer = $("<div>").addClass("card-container");
+    storedHistory.forEach(city => {
+        const historyCard = $("<div>").addClass("card").text(city);
+        historyCard.on("click", () => getCity(city));
+        historyContainer.append(historyCard);
+    });
+    $("#history-mobile").empty().append(historyContainer);
+};
