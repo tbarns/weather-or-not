@@ -16,7 +16,9 @@
     <aside class="col-md-2 d-md-none justify-content-center" id="history-mobile">
         <div class="col-md-10">
             <input placeholder="where?" />
+
         </div>
+
         <div class="col-md-10">
             <button id="searchBtn">SEARCH</button>
         </div>
@@ -29,7 +31,12 @@
 
             <aside class="col-md-2 d-none d-md-block" id="history"></aside>
             <div class="col-md-8">
-                <section class="weatherFuture weather-card" id="day1"></section>
+                <section class="weatherFuture weather-card" id="day1">
+                    <div id="error-message" class="alert alert-danger d-none" role="alert">
+                        Please enter a city name.
+                    </div>
+                </section>
+
                 <div class="row col-12 justify-content-center" id="weatherBar">
                     <section class="col-md-3 future weather-card" id="day2"></section>
                     <section class="col-md-3 future weather-card" id="day3"></section>
@@ -39,10 +46,10 @@
 
                 </div>
             </div>
-          
+
         </div>
     </main>
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

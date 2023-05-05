@@ -10,10 +10,13 @@ const capitalizeWords = str => {
 const getCity = () => {
     city = capitalizeWords($("#input").val());
     if (!city) {
-        const errorBox = $("<div>").addClass("alert alert-danger").attr("role", "alert")
-            .text("Please enter a city name.");
-        $("#searchBox").append(errorBox);
+
+        $("#error-message").removeClass("d-none"); // Show the error message
         return;
+    } else {
+        $("#error-message").addClass("d-none"); // Hide the error message
+
+
     }
     const queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     updateLocalStorage(city);
@@ -181,3 +184,4 @@ const renderMobileHistory = () => {
     });
     $("#history-mobile").empty().append(historyContainer);
 };
+
