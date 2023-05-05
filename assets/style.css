@@ -67,6 +67,12 @@ aside {
   /* Added to position history on the far left */
 }
 
+#history input,
+#history button {
+  display: block;
+  margin: 0 auto;
+}
+
 #history-mobile {
   display: block;
   position:absolute;
