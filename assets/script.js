@@ -230,19 +230,19 @@ const renderMobileHistory = (currentPage = 1) => {
 };
 
 
-$("#clearBtn-mobile").on("click", clearHistory);
-
+$(document).on("click", "#clearBtn-mobile", clearHistory);
 
 const checkForMobile = () => {
     const isMobile = window.matchMedia("screen and (max-width: 576px)").matches;
 
     if (isMobile) {
-        $("#history").hide();
-        $("#history-mobile").addClass("show");
+        $('#history').hide();
+        $('#history-mobile').addClass('show');
         renderMobileHistory();
     } else {
-        $("#history").show();
-        $("#history-mobile").removeClass("show");
+        $('#history').show();
+        $('#history-mobile').removeClass('show');
+        renderHistory(1); // Call renderHistory for the desktop view
     }
 };
 
@@ -253,7 +253,3 @@ checkForMobile();
 $(window).on("resize", checkForMobile);
 
 
-//prevents input field from losing focus on mobile devices
-$(document).on("touchmove", function () {
-    document.activeElement.blur();
-});

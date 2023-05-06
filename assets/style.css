@@ -262,6 +262,7 @@ Weather Future Styles .weatherFuture {
     flex-direction: column;
   }
 
+
   .jumbotron {
     font-size: 20px;
     display: block;
@@ -281,7 +282,12 @@ Weather Future Styles .weatherFuture {
     position: static;
     transform: none;
     margin-top: 1rem;
+    
   }
+
+li{
+  z-index: 1000;
+}
 
   #clearBtn-mobile,
   #searchBtn-mobile{
@@ -330,7 +336,7 @@ Weather Future Styles .weatherFuture {
   #history-mobile {
     background-color: bisque;
     padding-top: 2rem;
-    padding-bottom: 6rem;
+    height: auto;
     position: static;
     display: none;
     order: 1;
