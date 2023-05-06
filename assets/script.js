@@ -193,7 +193,7 @@ const renderMobileHistory = () => {
     $("#history-mobile").append(historyContainer);
 };
 
-$("#history-mobile").on("click", "#searchBtn", (event) => {
+$("#history-mobile").on("click", (event) => {
     event.preventDefault();
     getCity();
   });
