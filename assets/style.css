@@ -319,6 +319,7 @@ Weather Future Styles .weatherFuture {
     position: static;
     display: none;
     order: 1;
+    z-index: 1000;
   }
 
   #history-mobile.show {

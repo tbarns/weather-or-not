@@ -99,10 +99,7 @@ $(".history-btn").on("click", function () {
     $("#history-mobile").toggleClass("show");
 });
 
-$(document).on("click", "#searchBtn, #history-mobile #searchBtn", (event) => {
-    event.preventDefault();
-    getCity();
-});
+
 
 $("#history").on("click", "#clearBtn", clearHistory);
 
@@ -187,16 +184,20 @@ const renderMobileHistory = () => {
 
     storedHistory.forEach(city => {
         const historyCard = $("<div>").addClass("card").text(city);
-        historyCard.on("click", () => getCity(city));
+        historyCard.on("click", () => {
+            $("#input-mobile").val(city);
+            getCity();
+        });
         historyContainer.append(historyCard);
     });
     $("#history-mobile").append(historyContainer);
 };
 
-$("#history-mobile").on("click", (event) => {
+$("body").on("click", "#searchBtn-mobile", (event) => {
     event.preventDefault();
     getCity();
   });
+  
 
 $("#clearBtn-mobile").on("click", clearHistory);
 
