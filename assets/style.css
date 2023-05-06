@@ -17,6 +17,9 @@ button {
   user-select: auto;
 }
 
+
+
+
 /* Jumbotron Styles */
 .jumbotron {
   background: aquamarine;
@@ -280,6 +283,11 @@ Weather Future Styles .weatherFuture {
     margin-top: 1rem;
   }
 
+  #clearBtn-mobile,
+  #searchBtn-mobile{
+    background-color: cadetblue;
+  }
+
   .weather-card {
     width: 100%;
     margin: 0;
@@ -287,6 +295,7 @@ Weather Future Styles .weatherFuture {
   }
 
   #day1 {
+    margin-top: 2rem;
     height: auto;
     margin-bottom: 2rem;
   }
@@ -309,13 +318,19 @@ Weather Future Styles .weatherFuture {
     margin-bottom: 2rem;
   }
 
-  .card {
+  .card-container .card {
     left: 10%;
     width: 80%;
+  margin-top: .15rem;
+  display: block;
+  text-align: center;
   }
 
   /* Updated media query for history-mobile */
   #history-mobile {
+    background-color: bisque;
+    padding-top: 2rem;
+    padding-bottom: 6rem;
     position: static;
     display: none;
     order: 1;
