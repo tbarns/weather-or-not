@@ -48,6 +48,7 @@ $(document).on("click", "#searchBtn", getCity);
 $(document).on("click", "#searchBtn-mobile", getCity);
 
 
+
 const appendHistory = city => {
     const history = $("<div>").text(city).addClass("card");
     $("#history").append(history);
@@ -199,7 +200,8 @@ const renderMobileHistory = (currentPage = 1) => {
     const searchBtn = $('<button>').addClass('col-md-10').attr('id', 'searchBtn-mobile').text('SEARCH');
     const clearBtn = $('<button>').addClass('col-md-10').attr('id', 'clearBtn-mobile').text('CLEAR HISTORY');
     $("#history-mobile").empty().append(input, '<br><br>', searchBtn, '<br>', clearBtn);
-
+    $(document).on("touchend", "#searchBtn", getCity);
+    $(document).on("touchend", "#searchBtn-mobile", getCity);
     storedHistory.slice(startIndex, endIndex).forEach(city => {
         const historyCard = $("<div>").addClass("card").text(city);
         historyCard.on("click", () => {

@@ -17,7 +17,10 @@ button {
   user-select: auto;
 }
 
-
+li{
+  z-index: 1000;
+  padding-top: calc(1*.3rem);
+}
 
 
 /* Jumbotron Styles */
@@ -285,13 +288,11 @@ Weather Future Styles .weatherFuture {
     
   }
 
-li{
-  z-index: 1000;
-}
+
 
   #clearBtn-mobile,
   #searchBtn-mobile{
-    background-color: white;
+    background-color: pink;
   }
 
   .weather-card {
