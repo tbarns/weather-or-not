@@ -6,16 +6,16 @@ const capitalizeWords = (str) => {
 
     return str.replace(/\w\S*/g, (word) => {
         return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
-       
+
     });
-    
+
 };
 
 
 const getCity = () => {
 
     city = capitalizeWords($("#input").val() || $("#input-mobile").val());
-   
+
     if (!city) {
         $("#error-message").removeClass("d-none"); // Show the error message
         return;
@@ -36,6 +36,7 @@ const getCity = () => {
         .then(data => {
             const { lon, lat } = data.coord;
             fiveDay(lat, lon, city);
+            console.log(data)
         })
         .catch(error => {
             console.error('Error fetching data:', error);
@@ -45,7 +46,7 @@ const getCity = () => {
 };
 
 $(document).on("click", "#searchBtn", getCity);
-$(document).on("click", "#searchBtn-mobile", getCity);
+$(document).on("touchend", "#searchBtn-mobile", getCity);
 
 
 
@@ -84,12 +85,14 @@ const fiveDay = (lat, lon, city) => {
                 moment().add(4, "days").format("dddd")
             ];
             days.forEach((day, index) => {
+                const uncapDescription = data.list[index * 8].weather[0].description
+                const description = capitalizeWords(uncapDescription)
                 const temp = data.list[index * 8].main.temp;
                 const humidity = data.list[index * 8].main.humidity;
                 const windSpeed = data.list[index * 8].wind.speed;
                 const weatherIcon = data.list[index * 8].weather[0].icon;
                 const iconUrl = `https://openweathermap.org/img/w/${weatherIcon}.png`;
-                const cityName = $("<div>").addClass("city-name").text(city);
+                const cityName = $("<div>").addClass("city-name").text(`${description} in ${city}`);
                 const dayCity = $("<p>").append(`${day} in ${city}`);
                 const dayTemp = $("<p>").append(`Temp: ${temp} °F`);
                 const dayHumidity = $("<p>").append(`Humidity: ${humidity}%`);
@@ -200,7 +203,7 @@ const renderMobileHistory = (currentPage = 1) => {
     const searchBtn = $('<button>').addClass('col-md-10').attr('id', 'searchBtn-mobile').text('SEARCH');
     const clearBtn = $('<button>').addClass('col-md-10').attr('id', 'clearBtn-mobile').text('CLEAR HISTORY');
     $("#history-mobile").empty().append(input, '<br><br>', searchBtn, '<br>', clearBtn);
-    $(document).on("touchend", "#searchBtn", getCity);
+    $(document).on("click", "#searchBtn", getCity);
     $(document).on("touchend", "#searchBtn-mobile", getCity);
     storedHistory.slice(startIndex, endIndex).forEach(city => {
         const historyCard = $("<div>").addClass("card").text(city);
