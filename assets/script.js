@@ -1,23 +1,25 @@
 const apiKey = "f134c88b914b12f6422fd757a1b6307c";
 let city;
 
-const capitalizeWords = str => {
-    return str.replace(/\w\S*/g, word => {
-        return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
+const capitalizeWords = (str) => {
+    if (!str) return ""; // Add this line to handle undefined or null values
+  
+    return str.replace(/\w\S*/g, (word) => {
+      return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
     });
-};
+  };
+  
 
 const getCity = () => {
-    city = capitalizeWords($("#input").val());
+    city = capitalizeWords($("#input").val() || $("#input-mobile").val());
     if (!city) {
 
         $("#error-message").removeClass("d-none"); // Show the error message
         return;
     } else {
         $("#error-message").addClass("d-none"); // Hide the error message
-
-
     }
+    city = capitalizeWords(city); 
     const queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     updateLocalStorage(city);
     console.log(`click  ${city}`);
@@ -37,6 +39,7 @@ const getCity = () => {
             alert("Error fetching data: " + error);
         });
 };
+
 
 
 const appendHistory = city => {
@@ -177,6 +180,11 @@ $(window).on('resize', () => {
 const renderMobileHistory = () => {
     const storedHistory = JSON.parse(localStorage.getItem("history")) || [];
     const historyContainer = $("<div>").addClass("card-container");
+    const input = $('<input>').addClass('col-md-10').attr('placeholder', 'where?').attr('id', 'input-mobile');
+    const searchBtn = $('<button>').addClass('col-md-10').attr('id', 'searchBtn-mobile').text('SEARCH');
+    const clearBtn = $('<button>').addClass('col-md-10').attr('id', 'clearBtn-mobile').text('CLEAR HISTORY');
+    $("#history-mobile").empty().append(input, '<br><br>', searchBtn, '<br>', clearBtn);
+
     storedHistory.forEach(city => {
         const historyCard = $("<div>").addClass("card").text(city);
         historyCard.on("click", () => getCity(city));
@@ -185,3 +193,9 @@ const renderMobileHistory = () => {
     $("#history-mobile").empty().append(historyContainer);
 };
 
+$(document).on("click", "#searchBtn-mobile", (event) => {
+    event.preventDefault();
+    getCity();
+});
+
+$("#clearBtn-mobile").on("click", clearHistory);

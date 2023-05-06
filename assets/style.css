@@ -252,8 +252,9 @@ Weather Future Styles .weatherFuture {
   margin-top: 0.5rem;
 }
 
+
 /* Responsive Styles */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .row {
     flex-direction: column;
   }
@@ -265,16 +266,11 @@ Weather Future Styles .weatherFuture {
 
   .wrapper {
     order: 1;
-    /* Add this line */
   }
-
-
-
 
   #history+.col-md-8 {
     margin-top: 5rem;
     order: 1;
-    /* Change this line */
     margin-top: 0;
   }
 
@@ -304,7 +300,6 @@ Weather Future Styles .weatherFuture {
 
   #history button {
     width: 100px;
-    /* Adjust the width of the button */
   }
 
   #day2,
@@ -319,10 +314,10 @@ Weather Future Styles .weatherFuture {
     width: 80%;
   }
 
-  /* Added to recreate history in the history-mobile section */
+  /* Updated media query for history-mobile */
   #history-mobile {
     position: static;
-    display: block;
+    display: none;
     order: 1;
   }
 
@@ -332,6 +327,6 @@ Weather Future Styles .weatherFuture {
     align-items: center;
     justify-content: center;
     z-index: 100;
-
+    margin-bottom: 2rem; /* Add margin to prevent overlap */
   }
 }
