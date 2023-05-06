@@ -46,7 +46,7 @@ const getCity = () => {
 };
 
 $(document).on("click", "#searchBtn", getCity);
-$(document).on("touchend", "#searchBtn-mobile", getCity);
+$(document).on("click", "#searchBtn-mobile", getCity);
 
 
 
