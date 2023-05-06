@@ -190,12 +190,32 @@ const renderMobileHistory = () => {
         historyCard.on("click", () => getCity(city));
         historyContainer.append(historyCard);
     });
-    $("#history-mobile").empty().append(historyContainer);
+    $("#history-mobile").append(historyContainer);
 };
 
-$(document).on("click", "#searchBtn-mobile", (event) => {
+$("#history-mobile").on("click", "#searchBtn", (event) => {
     event.preventDefault();
     getCity();
-});
+  });
 
 $("#clearBtn-mobile").on("click", clearHistory);
+
+const checkForMobile = () => {
+    const isMobile = window.matchMedia("screen and (max-width: 576px)").matches;
+  
+    if (isMobile) {
+      $("#history").hide();
+      $("#history-mobile").addClass("show");
+      renderMobileHistory();
+    } else {
+      $("#history").show();
+      $("#history-mobile").removeClass("show");
+    }
+  };
+  
+  // Call checkForMobile on page load
+  checkForMobile();
+  
+  // Call checkForMobile on window resize
+  $(window).on("resize", checkForMobile);
+  

@@ -326,7 +326,6 @@ Weather Future Styles .weatherFuture {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 100;
     margin-bottom: 2rem; /* Add margin to prevent overlap */
   }
 }
