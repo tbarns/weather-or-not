@@ -225,7 +225,6 @@ const renderMobileHistory = (currentPage = 1) => {
         renderMobileHistory(newPage);
     });
 };
-renderMobileHistory(1);
 
 
 $("#clearBtn-mobile").on("click", clearHistory);

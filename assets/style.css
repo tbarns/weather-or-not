@@ -344,17 +344,4 @@ Weather Future Styles .weatherFuture {
     justify-content: center;
     margin-bottom: 2rem; /* Add margin to prevent overlap */
   }
-
-/* Add the following CSS code */
-#history-mobile .card {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-#history-mobile .card-container {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding-bottom: 1rem;
-}
 }
