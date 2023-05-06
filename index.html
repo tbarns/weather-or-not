@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/style.css" />
@@ -15,21 +16,20 @@
     <header id="currentDay" class="col-12 jumbotron"></header>
     <aside class="col-md-2 d-md-none justify-content-center" id="history-mobile">
         <div class="col-md-10">
-            <input placeholder="where?" />
-
+            <input placeholder="where?" id="input-mobile" />
+        </div>
+        <div class="col-md-10">
+            <button id="searchBtn-mobile">SEARCH</button>
+        </div>
         </div>
 
         <div class="col-md-10">
             <button id="searchBtn">SEARCH</button>
         </div>
-        </aside>
-        <div class="col-md-10">
-            <button id="clearBtn">CLEAR HISTORY</button>
-        </div>
+    </aside>
 
-        <div class="card-container">
-            <!-- Add this div as a container for the history cards -->
-          </div>
+
+
     </aside>
     <main class="container">
         <div class="row">
@@ -56,7 +56,6 @@
     </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="assets/script.js"></script>
 </body>

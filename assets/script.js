@@ -6,14 +6,17 @@ const capitalizeWords = (str) => {
 
     return str.replace(/\w\S*/g, (word) => {
         return word.charAt(0).toUpperCase() + word.substr(1).toLowerCase();
+       
     });
+    
 };
 
 
 const getCity = () => {
-    city = capitalizeWords($("#input").val() || $("#input-mobile").val());
-    if (!city) {
 
+    city = capitalizeWords($("#input").val() || $("#input-mobile").val());
+   
+    if (!city) {
         $("#error-message").removeClass("d-none"); // Show the error message
         return;
     } else {
@@ -22,7 +25,7 @@ const getCity = () => {
     city = capitalizeWords(city);
     const queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     updateLocalStorage(city);
-    console.log(`click  ${city}`);
+
     fetch(queryURL)
         .then(response => {
             if (!response.ok) {
@@ -38,9 +41,13 @@ const getCity = () => {
             console.error('Error fetching data:', error);
             alert("Error fetching data: " + error);
         });
+    console.log('city')
 };
 
-
+$(document).ready(function() {
+    document.getElementById("searchBtn").addEventListener("click", getCity);
+    document.getElementById("searchBtn-mobile").addEventListener("click", getCity);
+});
 
 const appendHistory = city => {
     const history = $("<div>").text(city).addClass("card");
@@ -99,8 +106,6 @@ $(".history-btn").on("click", function () {
     $("#history-mobile").toggleClass("show");
 });
 
-
-
 $("#history").on("click", "#clearBtn", clearHistory);
 
 $("#currentDay").text(moment().format("dddd, MMM Do, YYYY"));
@@ -141,7 +146,7 @@ const renderHistory = currentPage => {
     // Add history cards for the current page
     storedHistory.slice(startIndex, endIndex).forEach(city => appendHistory(city));
 
-   
+
 
     // Render the pagination
     const totalPages = Math.ceil(storedHistory.length / itemsPerPage);
@@ -190,7 +195,6 @@ const renderMobileHistory = (currentPage = 1) => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const storedHistory = JSON.parse(localStorage.getItem("history")) || [];
-
     const historyContainer = $("<div>").addClass("card-container");
     const input = $('<input>').addClass('col-md-10').attr('placeholder', 'where?').attr('id', 'input-mobile');
     const searchBtn = $('<button>').addClass('col-md-10').attr('id', 'searchBtn-mobile').text('SEARCH');
@@ -229,6 +233,7 @@ const renderMobileHistory = (currentPage = 1) => {
 
 $("#clearBtn-mobile").on("click", clearHistory);
 
+
 const checkForMobile = () => {
     const isMobile = window.matchMedia("screen and (max-width: 576px)").matches;
 
@@ -247,3 +252,9 @@ checkForMobile();
 
 // Call checkForMobile on window resize
 $(window).on("resize", checkForMobile);
+
+
+//prevents input field from losing focus on mobile devices
+$(document).on("touchmove", function () {
+    document.activeElement.blur();
+});
