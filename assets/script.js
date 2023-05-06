@@ -44,10 +44,9 @@ const getCity = () => {
     console.log('city')
 };
 
-$(document).ready(function() {
-    document.getElementById("searchBtn").addEventListener("click", getCity);
-    document.getElementById("searchBtn-mobile").addEventListener("click", getCity);
-});
+$(document).on("click", "#searchBtn", getCity);
+$(document).on("click", "#searchBtn-mobile", getCity);
+
 
 const appendHistory = city => {
     const history = $("<div>").text(city).addClass("card");
